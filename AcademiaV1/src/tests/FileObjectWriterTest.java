@@ -19,6 +19,7 @@ public class FileObjectWriterTest {
 	private static final String TEST_OBJECT_TWO = "Bye";
 	
 	@Before
+	@Test
 	public void deleteTestFiles()
 	{
 		File testFile = new File(TEST_FILE);
