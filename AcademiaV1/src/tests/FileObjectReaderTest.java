@@ -18,6 +18,7 @@ public class FileObjectReaderTest {
 	private static final String TEST_FILE = "src/tests/FileObjectReaderTestFile.dat";
 	private static final String TEST_OBJECT_ONE = "Hi";
 	private static final String TEST_OBJECT_TWO = "Bye";
+	
 	@BeforeClass
 	public static void createTestFile(){
 		try (  FileOutputStream fileStream = new FileOutputStream(TEST_FILE);
