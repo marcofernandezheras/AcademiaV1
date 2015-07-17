@@ -5,7 +5,10 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ FileObjectReaderTest.class, FileObjectWriterTest.class })
+@SuiteClasses({ 
+		FileObjectReaderTest.class, 
+		FileObjectWriterTest.class,
+		FileStudentManagerTest.class })
 public class AllTests {
 
 }
