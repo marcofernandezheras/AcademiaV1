@@ -1,7 +1,7 @@
 package model;
 
-import java.io.EOFException;
+import java.io.IOException;
 
 public interface ObjectReader extends AutoCloseable {	
-	public Object nextObject() throws EOFException;
+	public Object nextObject() throws IOException;
 }
