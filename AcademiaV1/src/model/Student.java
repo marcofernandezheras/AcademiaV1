@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @SuppressWarnings("serial")
 public class Student implements Serializable{
@@ -9,6 +10,7 @@ public class Student implements Serializable{
 	private String name; 
 	private String surnames;
 	private String comments; 
+	private Date bornDate;
 	
 	public Student(int id, String dni, String name, String surnames) {
 		super();
@@ -52,6 +54,14 @@ public class Student implements Serializable{
 
 	public int getId() {
 		return id;
+	}
+
+	public Date getBornDate() {
+		return bornDate;
+	}
+
+	public void setBornDate(Date bornDate) {
+		this.bornDate = bornDate;
 	}		
 	
 }

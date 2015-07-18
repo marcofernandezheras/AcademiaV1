@@ -1,5 +1,6 @@
 package view;
 
+import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JPanel;
 
 import java.awt.GridBagLayout;
@@ -11,14 +12,22 @@ import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 
 import java.awt.Insets;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Properties;
 
 import javax.swing.JButton;
+
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 
 @SuppressWarnings("serial")
 public class CreateStudentPanel extends JPanel {
 	protected JTextField txtName;
 	protected JTextField txtSurnames;
-	protected JTextField txtBornDate;
+	protected JDatePickerImpl txtBornDate;
 	protected JTextField txtDni;
 	protected JButton btnCreate;
 
@@ -100,14 +109,41 @@ public class CreateStudentPanel extends JPanel {
 		gbc_lblFechaNacimiento.gridy = 6;
 		add(lblFechaNacimiento, gbc_lblFechaNacimiento);
 		
-		txtBornDate = new JTextField();
+		UtilDateModel model = new UtilDateModel();
+		Properties p = new Properties();
+		p.put("text.today", "Today");
+		p.put("text.month", "Month");
+		p.put("text.year", "Year");
+		JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+		
+		
+		txtBornDate = new JDatePickerImpl(datePanel, new AbstractFormatter() {
+			
+			private String datePattern = "dd/MM/yyyy";
+		    private SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
+
+		    @Override
+		    public Object stringToValue(String text) throws ParseException {
+		        return dateFormatter.parseObject(text);
+		    }
+
+		    @Override
+		    public String valueToString(Object value) throws ParseException {
+		        if (value != null) {
+		            Calendar cal = (Calendar) value;
+		            return dateFormatter.format(cal.getTime());
+		        }
+
+		        return "";
+		    }
+		});
+		
 		GridBagConstraints gbc_txtBornDate = new GridBagConstraints();
 		gbc_txtBornDate.insets = new Insets(0, 0, 5, 5);
 		gbc_txtBornDate.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtBornDate.gridx = 2;
 		gbc_txtBornDate.gridy = 6;
 		add(txtBornDate, gbc_txtBornDate);
-		txtBornDate.setColumns(10);
 		
 		btnCreate = new JButton("Crear");
 		GridBagConstraints gbc_btnCreate = new GridBagConstraints();

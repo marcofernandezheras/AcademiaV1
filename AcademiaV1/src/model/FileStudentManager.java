@@ -18,6 +18,8 @@ public class FileStudentManager implements StudentManager {
 			while(true){
 				Object object = reader.nextObject();
 				Student student = (Student) object;
+				if(student.getId() > lastId)
+					lastId = student.getId() + 1;
 				studentList.add(student);
 			}
 		} catch (FileNotFoundException e) {

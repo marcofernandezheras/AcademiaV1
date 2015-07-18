@@ -110,6 +110,11 @@ public class FileStudentManagerTest {
 
 			FileStudentManager secondManager = new FileStudentManager();
 			assertEquals(2, secondManager.getAllStudents().size());
+			
+			Student thirdStudent = secondManager.createStudent("dni", "name", "surnames");
+			assertNotNull(thirdStudent);
+			assertEquals(3, secondManager.getAllStudents().size());
+			assertEquals(secondStudent.getId() + 1, thirdStudent.getId());
 		} catch (Exception e) {		
 			e.printStackTrace();
 			fail();
@@ -128,6 +133,12 @@ public class FileStudentManagerTest {
 			student.setName("name changed");
 			
 			manager.updateStudent(student);
+			
+			assertNotNull(manager.getStudent(student.getDni()));
+			assertEquals(student, manager.getStudent(student.getDni()));
+			
+			FileStudentManager secondManager = new FileStudentManager();
+			assertEquals(1, secondManager.getAllStudents().size());
 			
 			assertNotNull(manager.getStudent(student.getDni()));
 			assertEquals(student, manager.getStudent(student.getDni()));
