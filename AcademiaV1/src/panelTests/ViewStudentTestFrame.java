@@ -1,16 +1,18 @@
-package tests;
+package panelTests;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
-import controller.CreateStudentController;
+import controller.ViewStudentController;
 import model.FileStudentManager;
+import view.ViewStudentPanel;
 
-@SuppressWarnings("serial")
-public class CreateStudentTestFrame extends JFrame {
+public class ViewStudentTestFrame extends JFrame {
 
 	private JPanel contentPane;
 
@@ -21,7 +23,7 @@ public class CreateStudentTestFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CreateStudentTestFrame frame = new CreateStudentTestFrame();
+					ViewStudentTestFrame frame = new ViewStudentTestFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,10 +37,10 @@ public class CreateStudentTestFrame extends JFrame {
 	 * @throws Exception 
 	 * @throws IOException 
 	 */
-	public CreateStudentTestFrame() throws IOException, Exception {
+	public ViewStudentTestFrame() throws IOException, Exception {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		contentPane = new CreateStudentController(new FileStudentManager());
+		contentPane = new ViewStudentController(new FileStudentManager());
 		setContentPane(contentPane);
 	}
 
