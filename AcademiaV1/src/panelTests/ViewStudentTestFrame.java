@@ -1,17 +1,15 @@
 package panelTests;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 import controller.ViewStudentController;
 import model.FileStudentManager;
-import view.ViewStudentPanel;
 
+@SuppressWarnings("serial")
 public class ViewStudentTestFrame extends JFrame {
 
 	private JPanel contentPane;
