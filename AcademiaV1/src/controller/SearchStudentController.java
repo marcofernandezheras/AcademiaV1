@@ -36,6 +36,8 @@ public class SearchStudentController extends SearchStudentPanel {
 			currentStudent = studentManager.getStudent(dni);
 			if(currentStudent == null)
 				JOptionPane.showMessageDialog(this, "Alumno no encontrado","Error",JOptionPane.WARNING_MESSAGE);
+			else
+				txtSearchDni.setText("");
 		}
 		else
 			JOptionPane.showMessageDialog(this, "Debe introducir un dni para buscar","Error",JOptionPane.WARNING_MESSAGE);

@@ -35,8 +35,8 @@ public class ViewStudentPanel extends SearchStudentController {
 		super(studentManager);
 		GridBagLayout gridBagLayout = (GridBagLayout) getLayout();
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 20};
 		
 		JLabel lblDni = new JLabel("Dni");
 		GridBagConstraints gbc_lblDni = new GridBagConstraints();
@@ -98,7 +98,7 @@ public class ViewStudentPanel extends SearchStudentController {
 		JLabel lblFechaDeNacimiento = new JLabel("Fecha de nacimiento");
 		GridBagConstraints gbc_lblFechaDeNacimiento = new GridBagConstraints();
 		gbc_lblFechaDeNacimiento.anchor = GridBagConstraints.EAST;
-		gbc_lblFechaDeNacimiento.insets = new Insets(0, 0, 0, 5);
+		gbc_lblFechaDeNacimiento.insets = new Insets(0, 0, 5, 5);
 		gbc_lblFechaDeNacimiento.gridx = 1;
 		gbc_lblFechaDeNacimiento.gridy = 7;
 		add(lblFechaDeNacimiento, gbc_lblFechaDeNacimiento);
@@ -136,7 +136,7 @@ public class ViewStudentPanel extends SearchStudentController {
 		
 		GridBagConstraints gbc_txtBornDate = new GridBagConstraints();
 		gbc_txtBornDate.gridwidth = 2;
-		gbc_txtBornDate.insets = new Insets(0, 0, 0, 5);
+		gbc_txtBornDate.insets = new Insets(0, 0, 5, 5);
 		gbc_txtBornDate.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtBornDate.gridx = 2;
 		gbc_txtBornDate.gridy = 7;

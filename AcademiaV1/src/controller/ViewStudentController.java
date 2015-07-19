@@ -19,7 +19,7 @@ public class ViewStudentController extends ViewStudentPanel {
 		if(currentStudent != null)
 			showStudentData();
 		else
-			clearStudentData();
+			clearGui();
 	}
 
 
@@ -37,7 +37,7 @@ public class ViewStudentController extends ViewStudentPanel {
 		txtBornDate.getModel().setSelected(true);
 	}
 	
-	protected void clearStudentData() {
+	protected void clearGui() {
 		txtDni.setText("");
 		txtName.setText("");
 		txtSurnames.setText("");
