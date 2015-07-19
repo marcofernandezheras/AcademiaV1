@@ -22,7 +22,7 @@ import org.jdatepicker.impl.UtilDateModel;
 
 
 @SuppressWarnings("serial")
-public class ViewStudentPanel extends SearchStudentController {
+public abstract class ViewStudentPanel extends SearchStudentController {
 	protected JTextField txtDni;
 	protected JTextField txtName;
 	protected JTextField txtSurnames;

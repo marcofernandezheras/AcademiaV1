@@ -7,7 +7,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
 @SuppressWarnings("serial")
-public class DeleteStudentPanel extends ViewStudentController {
+public abstract class DeleteStudentPanel extends ViewStudentController {
 	protected JButton btnDelete;
 
 	public DeleteStudentPanel(StudentManager studentManager) {

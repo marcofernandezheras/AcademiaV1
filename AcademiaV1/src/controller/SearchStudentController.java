@@ -12,7 +12,7 @@ import view.SearchStudentPanel;
 @SuppressWarnings("serial")
 public class SearchStudentController extends SearchStudentPanel {
 	protected Student currentStudent;
-	protected StudentManager studentManager;
+	protected final StudentManager studentManager;
 	
 	public SearchStudentController(StudentManager studentManager) {
 		this.studentManager = studentManager;

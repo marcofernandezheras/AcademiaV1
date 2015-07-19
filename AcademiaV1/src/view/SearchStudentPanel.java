@@ -15,7 +15,7 @@ import java.awt.Insets;
 import javax.swing.JButton;
 
 @SuppressWarnings("serial")
-public class SearchStudentPanel extends JPanel {
+public abstract class SearchStudentPanel extends JPanel {
 	protected JTextField txtSearchDni;
 	protected JButton btnSearch;
 

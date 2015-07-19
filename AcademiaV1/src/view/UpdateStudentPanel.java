@@ -7,7 +7,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
 @SuppressWarnings("serial")
-public class UpdateStudentPanel extends ViewStudentController {
+public abstract class UpdateStudentPanel extends ViewStudentController {
 	protected JButton btnSave;
 
 	public UpdateStudentPanel(StudentManager studentManager) {

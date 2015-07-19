@@ -24,7 +24,7 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 @SuppressWarnings("serial")
-public class CreateStudentPanel extends JPanel {
+public abstract class CreateStudentPanel extends JPanel {
 	protected JTextField txtName;
 	protected JTextField txtSurnames;
 	protected JDatePickerImpl txtBornDate;
