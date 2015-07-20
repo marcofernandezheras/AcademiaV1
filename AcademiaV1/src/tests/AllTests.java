@@ -8,7 +8,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({ 
 		FileObjectReaderTest.class, 
 		FileObjectWriterTest.class,
-		FileStudentManagerTest.class })
+		FileStudentManagerTest.class,
+		FileTeacherManagerTest.class})
 public class AllTests {
 
 }
