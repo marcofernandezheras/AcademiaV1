@@ -35,6 +35,7 @@ public class ViewStudentController extends ViewStudentPanel {
 				calendar.get(Calendar.MONTH),
 				calendar.get(Calendar.DAY_OF_MONTH));
 		txtBornDate.getModel().setSelected(true);
+		txtComments.setText(currentStudent.getComments());
 	}
 	
 	protected void clearGui() {
@@ -42,5 +43,6 @@ public class ViewStudentController extends ViewStudentPanel {
 		txtName.setText("");
 		txtSurnames.setText("");
 		txtBornDate.getModel().setSelected(false);
+		txtComments.setText("");
 	}
 }

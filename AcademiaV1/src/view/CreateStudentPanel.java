@@ -22,6 +22,8 @@ import javax.swing.JButton;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 
 @SuppressWarnings("serial")
 public abstract class CreateStudentPanel extends JPanel {
@@ -30,16 +32,17 @@ public abstract class CreateStudentPanel extends JPanel {
 	protected JDatePickerImpl txtBornDate;
 	protected JTextField txtDni;
 	protected JButton btnCreate;
+	protected JTextArea txtComments;
 
 	/**
 	 * Create the panel.
 	 */
 	public CreateStudentPanel() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 20, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[]{20, 0, 0, 20, 0};
+		gridBagLayout.rowHeights = new int[]{20, 0, 20, 0, 0, 0, 0, 0, 0, 20, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		JLabel lblCrearAlumno = new JLabel("Crear Alumno");
@@ -145,14 +148,32 @@ public abstract class CreateStudentPanel extends JPanel {
 		gbc_txtBornDate.gridy = 6;
 		add(txtBornDate, gbc_txtBornDate);
 		
+		JLabel lblObservaciones = new JLabel("Observaciones");
+		GridBagConstraints gbc_lblObservaciones = new GridBagConstraints();
+		gbc_lblObservaciones.anchor = GridBagConstraints.NORTHEAST;
+		gbc_lblObservaciones.insets = new Insets(0, 0, 5, 5);
+		gbc_lblObservaciones.gridx = 1;
+		gbc_lblObservaciones.gridy = 7;
+		add(lblObservaciones, gbc_lblObservaciones);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 2;
+		gbc_scrollPane.gridy = 7;
+		add(scrollPane, gbc_scrollPane);
+		
+		txtComments = new JTextArea();
+		scrollPane.setViewportView(txtComments);
+		
 		btnCreate = new JButton("Crear");
 		GridBagConstraints gbc_btnCreate = new GridBagConstraints();
 		gbc_btnCreate.anchor = GridBagConstraints.EAST;
 		gbc_btnCreate.insets = new Insets(0, 0, 5, 5);
 		gbc_btnCreate.gridx = 2;
-		gbc_btnCreate.gridy = 7;
+		gbc_btnCreate.gridy = 8;
 		add(btnCreate, gbc_btnCreate);
 
 	}
-
 }

@@ -34,6 +34,7 @@ public class UpdateStudentController extends UpdateStudentPanel {
 		txtSurnames.setEditable(writable);
 		txtBornDate.setEnabled(writable);
 		txtBornDate.getComponent(1).setEnabled(writable);
+		txtComments.setEditable(writable);
 		btnSave.setEnabled(writable);		
 	}
 
@@ -65,6 +66,7 @@ public class UpdateStudentController extends UpdateStudentPanel {
 			currentStudent.setName(name);
 			currentStudent.setSurnames(surnames);
 			currentStudent.setBornDate(bornDate);
+			currentStudent.setComments(txtComments.getText());
 			return true;
 		}
 		JOptionPane.showMessageDialog(this, "Todos los datos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);

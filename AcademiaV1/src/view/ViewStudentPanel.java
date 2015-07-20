@@ -19,6 +19,8 @@ import javax.swing.JFormattedTextField.AbstractFormatter;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 
 @SuppressWarnings("serial")
@@ -27,6 +29,7 @@ public abstract class ViewStudentPanel extends SearchStudentController {
 	protected JTextField txtName;
 	protected JTextField txtSurnames;
 	protected JDatePickerImpl txtBornDate;
+	protected JTextArea txtComments;
 
 	/**
 	 * Create the panel.
@@ -35,8 +38,8 @@ public abstract class ViewStudentPanel extends SearchStudentController {
 		super(studentManager);
 		GridBagLayout gridBagLayout = (GridBagLayout) getLayout();
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 20};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20};
 		
 		JLabel lblDni = new JLabel("Dni");
 		GridBagConstraints gbc_lblDni = new GridBagConstraints();
@@ -141,6 +144,27 @@ public abstract class ViewStudentPanel extends SearchStudentController {
 		gbc_txtBornDate.gridx = 2;
 		gbc_txtBornDate.gridy = 7;
 		add(txtBornDate, gbc_txtBornDate);
+		
+		JLabel lblObservaciones = new JLabel("Observaciones");
+		GridBagConstraints gbc_lblObservaciones = new GridBagConstraints();
+		gbc_lblObservaciones.anchor = GridBagConstraints.NORTHEAST;
+		gbc_lblObservaciones.insets = new Insets(0, 0, 5, 5);
+		gbc_lblObservaciones.gridx = 1;
+		gbc_lblObservaciones.gridy = 8;
+		add(lblObservaciones, gbc_lblObservaciones);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.gridwidth = 2;
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 2;
+		gbc_scrollPane.gridy = 8;
+		add(scrollPane, gbc_scrollPane);
+		
+		txtComments = new JTextArea();
+		txtComments.setEditable(false);
+		scrollPane.setViewportView(txtComments);
 	}
 
 }

@@ -43,7 +43,10 @@ public class CreateStudentController extends CreateStudentPanel {
 		Date bornDate = (Date)value;
 		
 		if(validateData(name, surnames, dni))
+		{
 			createNewStudent(name, surnames, dni, bornDate);
+			clearGUI();
+		}
 		else
 			JOptionPane.showMessageDialog(this, "Todos los datos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 	}
@@ -59,9 +62,16 @@ public class CreateStudentController extends CreateStudentPanel {
 			Date bornDate) {
 		Student student = studentManager.createStudent(dni, name, surnames);
 		student.setBornDate(bornDate);
+		student.setComments(txtComments.getText());
 		studentManager.updateStudent(student);
 		JOptionPane.showMessageDialog(this, "Nuevo alumno creado con éxito");
 	}
 	
-	
+	private void clearGUI() {
+		txtName.setText("");
+		txtSurnames.setText("");
+		txtDni.setText("");
+		txtComments.setText("");
+		txtBornDate.getModel().setSelected(false);
+	}
 }
