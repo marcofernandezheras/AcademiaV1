@@ -9,7 +9,7 @@ import java.util.List;
 
 public class FileStudentManager implements StudentManager {
 
-	private int lastId = 1;
+	private static int lastId = 1;
 	List<Student> studentList = new ArrayList<Student>();
 	
 	public FileStudentManager() throws IOException, Exception{
