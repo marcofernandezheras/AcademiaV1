@@ -24,7 +24,7 @@ public class CreateStudentController extends CreateStudentPanel {
 		btnCreate.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				getDataAndCreateNewStudent();				
+				getDataAndCreateNewStudent();					
 			}
 		});		
 	}

@@ -176,4 +176,6 @@ public abstract class CreateStudentPanel extends JPanel {
 		add(btnCreate, gbc_btnCreate);
 
 	}
+	
+
 }

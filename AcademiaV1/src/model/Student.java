@@ -6,7 +6,7 @@ public class Student extends Person{
 	private String comments; 
 	
 	public Student(int id, String dni, String name, String surnames) {
-		super(id, surnames, surnames, surnames);		
+		super(id, dni, name, surnames);		
 	}
 
 	public String getComments() {
