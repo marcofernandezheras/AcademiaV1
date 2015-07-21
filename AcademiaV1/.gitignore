@@ -1,6 +1,4 @@
 /bin/
 *.prefs
 /.settings/
-/.classpath
-/.project
 *.dat
