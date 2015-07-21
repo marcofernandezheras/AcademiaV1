@@ -4,29 +4,45 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
-import javax.swing.JOptionPane;
-
 import model.StudentManager;
-import view.student.UpdateStudentPanel;
 
 @SuppressWarnings("serial")
-public class UpdateStudentController extends UpdateStudentPanel {
+public class UpdateStudentController extends ViewStudentController {
 
 	public UpdateStudentController(StudentManager studentManager) {
 		super(studentManager);
-		btnSave.addActionListener(new ActionListener() {			
+btnAction.addActionListener(new ActionListener() {
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				saveStudentChanges();
+				updateStudent();				
 			}
 		});
+		
+		btnAction.setEnabled(false);
 	}
 
-	@Override
-	protected void searchStudent() {
-		super.searchStudent();
-		toogleReadOnlyGUI(currentStudent != null);	
-	}				
+	protected void updateStudent() {
+		if(dataValid() && currentStudent != null)
+		{
+			String name = txtName.getText();
+			String surnames = txtSurnames.getText();
+			String dni = txtDni.getText();
+			Date bornDate = (Date)txtBornDate.getModel().getValue();
+			String comments = txtComments.getText();
+			
+			currentStudent.setDni(dni);
+			currentStudent.setName(name);
+			currentStudent.setSurnames(surnames);
+			currentStudent.setBornDate(bornDate);
+			currentStudent.setComments(comments);
+			
+			studentManager.updateStudent(currentStudent);
+			
+			clearUI();
+			currentStudent = null;
+		}
+	}
 	
 	private void toogleReadOnlyGUI(boolean writable) {
 		txtDni.setEditable(writable);
@@ -35,48 +51,18 @@ public class UpdateStudentController extends UpdateStudentPanel {
 		txtBornDate.setEnabled(writable);
 		txtBornDate.getComponent(1).setEnabled(writable);
 		txtComments.setEditable(writable);
-		btnSave.setEnabled(writable);		
-	}
-
-	private void saveStudentChanges() {
-		if(insertNewValuesOnStudent()){
-			studentManager.updateStudent(currentStudent);
-			clearGui();				
-		}
-	}
-	
-	private boolean insertNewValuesOnStudent() {
-		String name = txtName.getText();
-		String surnames = txtSurnames.getText();
-		String dni = txtDni.getText();				
-		
-		boolean valid = !name.isEmpty();
-		valid &= !surnames.isEmpty();
-		valid &= !dni.isEmpty();
-		if(valid)
-		{
-			Object value = txtBornDate.getModel().getValue();				
-			if(value == null || !(value instanceof Date))
-			{
-				JOptionPane.showMessageDialog(this, "Debe introducir una fecha de nacimiento", "Error", JOptionPane.ERROR_MESSAGE);
-				return false;
-			}		
-			Date bornDate = (Date)value;
-			currentStudent.setDni(dni);
-			currentStudent.setName(name);
-			currentStudent.setSurnames(surnames);
-			currentStudent.setBornDate(bornDate);
-			currentStudent.setComments(txtComments.getText());
-			return true;
-		}
-		JOptionPane.showMessageDialog(this, "Todos los datos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
-		return false;
-	}
+		btnAction.setEnabled(writable);	
+	}	
 
 	@Override
-	protected void clearGui() {
-		super.clearGui();
+	protected void clearUI() {
+		super.clearUI();
 		toogleReadOnlyGUI(false);
 		currentStudent = null;
+	}
+	
+	@Override
+	protected String getButtonLabel() {		
+		return "Modificar";
 	}
 }

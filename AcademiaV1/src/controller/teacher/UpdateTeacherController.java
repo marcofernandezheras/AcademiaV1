@@ -15,14 +15,14 @@ public class UpdateTeacherController extends ViewTeacherController {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				doAction();				
+				updateTeacher();				
 			}
 		});
 		
 		btnAction.setEnabled(false);
 	}
 
-	protected void doAction() {
+	protected void updateTeacher() {
 		if(dataValid() && currentTeacher != null)
 		{
 			String name = txtName.getText();

@@ -1,48 +1,75 @@
 package controller.student;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.swing.JOptionPane;
+
+import model.Student;
 import model.StudentManager;
 import view.student.ViewStudentPanel;
 
 @SuppressWarnings("serial")
 public class ViewStudentController extends ViewStudentPanel {
 
+	protected Student currentStudent;
+	protected final StudentManager studentManager;
+	
 	public ViewStudentController(StudentManager studentManager) {
-		super(studentManager);
+		super();
+		this.studentManager = studentManager;
+		bindEvents();
 	}
 
-	@Override
-	protected void searchStudent() {
-		super.searchStudent();
+	private void bindEvents() {
+		btnSearch.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				doSearch();
+			}
+		});
+	}
+
+	protected void doSearch() {
+		if(!txtSearch.getText().isEmpty())
+		{
+			currentStudent = studentManager.getStudent(txtSearch.getText());
+			populateGuiData();
+		}
+	}
+
+
+	protected void populateGuiData() {
+		clearUI();
 		if(currentStudent != null)
-			showStudentData();
+		{
+			txtSearch.setText("");
+			
+			txtDni.setText(currentStudent.getDni());
+			txtName.setText(currentStudent.getName());
+			txtSurnames.setText(currentStudent.getSurnames());
+			
+			Date bornDate = currentStudent.getBornDate();
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(bornDate);
+			txtBornDate.getModel().setDate(
+					calendar.get(Calendar.YEAR),
+					calendar.get(Calendar.MONTH),
+					calendar.get(Calendar.DAY_OF_MONTH));
+			txtBornDate.getModel().setSelected(true);
+			
+			txtComments.setText(currentStudent.getComments());
+		}	
 		else
-			clearGui();
-	}
-
-
-	private void showStudentData() {
-		txtDni.setText(currentStudent.getDni());
-		txtName.setText(currentStudent.getName());
-		txtSurnames.setText(currentStudent.getSurnames());
-		Date bornDate = currentStudent.getBornDate();
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(bornDate);
-		txtBornDate.getModel().setDate(
-				calendar.get(Calendar.YEAR),
-				calendar.get(Calendar.MONTH),
-				calendar.get(Calendar.DAY_OF_MONTH));
-		txtBornDate.getModel().setSelected(true);
-		txtComments.setText(currentStudent.getComments());
+			JOptionPane.showMessageDialog(this, "Profesor no encontrado", "Error", JOptionPane.WARNING_MESSAGE);
 	}
 	
-	protected void clearGui() {
-		txtDni.setText("");
-		txtName.setText("");
-		txtSurnames.setText("");
-		txtBornDate.getModel().setSelected(false);
+	@Override
+	protected void clearUI() {
+		super.clearUI();
 		txtComments.setText("");
 	}
 }

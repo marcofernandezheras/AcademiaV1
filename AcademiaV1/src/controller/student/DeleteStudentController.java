@@ -6,20 +6,20 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import model.StudentManager;
-import view.student.DeleteStudentPanel;
 
 @SuppressWarnings("serial")
-public class DeleteStudentController extends DeleteStudentPanel {
+public class DeleteStudentController extends ViewStudentController {
 
 	public DeleteStudentController(StudentManager studentManager) {
 		super(studentManager);
-		btnDelete.addActionListener(new ActionListener() {
+		btnAction.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				deleteStudent();
 			}
 		});
+		btnAction.setEnabled(false);
 	}
 
 	protected void deleteStudent() {
@@ -30,9 +30,20 @@ public class DeleteStudentController extends DeleteStudentPanel {
 			{
 				studentManager.deleteStudent(currentStudent);
 				currentStudent = null;
-				clearGui();
+				clearUI();
+				btnAction.setEnabled(false);
 			}
 		}
 	}
 
+	@Override
+	protected void doSearch() {	
+		super.doSearch();
+		btnAction.setEnabled(currentStudent != null);
+	}
+	
+	@Override
+	protected String getButtonLabel() {
+		return "Borrar";
+	}
 }

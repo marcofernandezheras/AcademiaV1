@@ -30,6 +30,7 @@ public class DeleteTeacherController extends ViewTeacherController {
 			{
 				teacherManager.deleteTeacher(currentTeacher);
 				clearUI();
+				currentTeacher = null;
 				btnAction.setEnabled(false);
 			}
 		}
