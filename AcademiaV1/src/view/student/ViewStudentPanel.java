@@ -10,20 +10,13 @@ import java.awt.GridBagLayout;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
-import org.jdatepicker.impl.JDatePickerImpl;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+
 
 
 @SuppressWarnings("serial")
 public abstract class ViewStudentPanel extends StudentInfoPanel {
-	protected JTextField txtDni;
-	protected JTextField txtName;
-	protected JTextField txtSurnames;
-	protected JDatePickerImpl txtBornDate;
-	protected JTextArea txtComments;
 	protected JTextField txtSearch;
 	protected JButton btnSearch;
 
@@ -32,13 +25,10 @@ public abstract class ViewStudentPanel extends StudentInfoPanel {
 	 */
 	public ViewStudentPanel() {
 		super();
-		txtComments.setEnabled(false);
-		txtSurnames.setEditable(false);
-		txtName.setEditable(false);
-		txtDni.setEditable(false);
+		
 		
 		GridBagLayout gridBagLayout = (GridBagLayout) getLayout();
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
 		
 		JPanel searchPanel = new JPanel();
@@ -81,6 +71,11 @@ public abstract class ViewStudentPanel extends StudentInfoPanel {
 		gbc_btnSearch.gridx = 3;
 		gbc_btnSearch.gridy = 1;
 		searchPanel.add(btnSearch, gbc_btnSearch);
+		
+		txtComments.setEnabled(false);
+		txtSurnames.setEditable(false);
+		txtName.setEditable(false);
+		txtDni.setEditable(false);
 	}
 
 	@Override
