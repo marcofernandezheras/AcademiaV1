@@ -1,4 +1,4 @@
-package controller;
+package controller.student;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,7 +6,7 @@ import java.util.Date;
 
 import javax.swing.JOptionPane;
 
-import view.CreateStudentPanel;
+import view.student.CreateStudentPanel;
 import model.Student;
 import model.StudentManager;
 

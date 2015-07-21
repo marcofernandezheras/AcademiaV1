@@ -1,4 +1,4 @@
-package controller;
+package controller.student;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 
 import model.Student;
 import model.StudentManager;
-import view.SearchStudentPanel;
+import view.student.SearchStudentPanel;
 
 @SuppressWarnings("serial")
 public class SearchStudentController extends SearchStudentPanel {

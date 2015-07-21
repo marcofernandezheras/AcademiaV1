@@ -1,4 +1,4 @@
-package controller;
+package controller.student;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,7 +7,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 import model.StudentManager;
-import view.UpdateStudentPanel;
+import view.student.UpdateStudentPanel;
 
 @SuppressWarnings("serial")
 public class UpdateStudentController extends UpdateStudentPanel {

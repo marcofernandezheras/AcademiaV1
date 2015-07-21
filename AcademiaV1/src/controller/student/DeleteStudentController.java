@@ -1,4 +1,4 @@
-package controller;
+package controller.student;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import model.StudentManager;
-import view.DeleteStudentPanel;
+import view.student.DeleteStudentPanel;
 
 @SuppressWarnings("serial")
 public class DeleteStudentController extends DeleteStudentPanel {

@@ -1,8 +1,10 @@
-package view;
+package view.student;
 
 import model.StudentManager;
-import controller.ViewStudentController;
+import controller.student.ViewStudentController;
+
 import javax.swing.JButton;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 

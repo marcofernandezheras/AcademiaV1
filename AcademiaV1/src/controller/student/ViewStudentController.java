@@ -1,10 +1,10 @@
-package controller;
+package controller.student;
 
 import java.util.Calendar;
 import java.util.Date;
 
 import model.StudentManager;
-import view.ViewStudentPanel;
+import view.student.ViewStudentPanel;
 
 @SuppressWarnings("serial")
 public class ViewStudentController extends ViewStudentPanel {
