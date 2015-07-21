@@ -5,9 +5,9 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.IOException;
 
-import model.FileObjectReader;
-import model.FileObjectWriter;
-import model.ObjectReader;
+import model.utils.FileObjectReader;
+import model.utils.FileObjectWriter;
+import model.utils.ObjectReader;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -7,7 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-import model.FileObjectReader;
+import model.utils.FileObjectReader;
 
 import org.junit.BeforeClass;
 import org.junit.Test;

@@ -6,9 +6,9 @@ import java.util.Date;
 
 import javax.swing.JOptionPane;
 
+import controller.managers.StudentManager;
 import view.student.CreateStudentPanel;
 import model.Student;
-import model.StudentManager;
 
 @SuppressWarnings("serial")
 public class CreateStudentController extends CreateStudentPanel {

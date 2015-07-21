@@ -7,8 +7,8 @@ import java.util.Date;
 
 import javax.swing.JOptionPane;
 
+import controller.managers.StudentManager;
 import model.Student;
-import model.StudentManager;
 import view.student.ViewStudentPanel;
 
 @SuppressWarnings("serial")

@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import model.TeacherManager;
+import controller.managers.TeacherManager;
 
 @SuppressWarnings("serial")
 public class DeleteTeacherController extends ViewTeacherController {

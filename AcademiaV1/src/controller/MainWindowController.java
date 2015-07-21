@@ -7,12 +7,12 @@ import java.io.IOException;
 
 import javax.swing.JPanel;
 
+import controller.managers.FileStudentManager;
+import controller.managers.StudentManager;
 import controller.student.CreateStudentController;
 import controller.student.DeleteStudentController;
 import controller.student.UpdateStudentController;
 import controller.student.ViewStudentController;
-import model.FileStudentManager;
-import model.StudentManager;
 import view.MainWindow;
 
 @SuppressWarnings("serial")

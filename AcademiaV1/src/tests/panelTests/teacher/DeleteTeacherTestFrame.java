@@ -1,4 +1,5 @@
-package panelTests.student;
+package tests.panelTests.teacher;
+
 
 import java.awt.EventQueue;
 import java.io.IOException;
@@ -6,11 +7,11 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import controller.student.ViewStudentController;
-import model.FileStudentManager;
+import controller.managers.FileTeacherManager;
+import controller.teacher.DeleteTeacherController;
 
 @SuppressWarnings("serial")
-public class ViewStudentTestFrame extends JFrame {
+public class DeleteTeacherTestFrame extends JFrame {
 
 	private JPanel contentPane;
 
@@ -21,7 +22,7 @@ public class ViewStudentTestFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ViewStudentTestFrame frame = new ViewStudentTestFrame();
+					DeleteTeacherTestFrame frame = new DeleteTeacherTestFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,10 +36,10 @@ public class ViewStudentTestFrame extends JFrame {
 	 * @throws Exception 
 	 * @throws IOException 
 	 */
-	public ViewStudentTestFrame() throws IOException, Exception {
+	public DeleteTeacherTestFrame() throws IOException, Exception {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		contentPane = new ViewStudentController(new FileStudentManager());
+		contentPane = new DeleteTeacherController(new FileTeacherManager());
 		setContentPane(contentPane);
 	}
 

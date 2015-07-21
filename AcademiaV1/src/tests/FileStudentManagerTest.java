@@ -4,14 +4,15 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 
-import model.Constants;
-import model.FileStudentManager;
 import model.Student;
+import model.utils.Constants;
 
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import controller.managers.FileStudentManager;
 
 public class FileStudentManagerTest {
 

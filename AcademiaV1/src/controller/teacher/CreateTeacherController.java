@@ -6,8 +6,8 @@ import java.util.Date;
 
 import javax.swing.JOptionPane;
 
+import controller.managers.TeacherManager;
 import model.Teacher;
-import model.TeacherManager;
 import view.teacher.CreateTeacherPanel;
 
 @SuppressWarnings("serial")

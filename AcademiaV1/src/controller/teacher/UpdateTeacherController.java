@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
-import model.TeacherManager;
+import controller.managers.TeacherManager;
 
 @SuppressWarnings("serial")
 public class UpdateTeacherController extends ViewTeacherController {

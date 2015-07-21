@@ -1,4 +1,4 @@
-package model;
+package controller.managers;
 
 import java.io.EOFException;
 import java.io.File;
@@ -6,6 +6,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Teacher;
+import model.utils.Constants;
+import model.utils.FileObjectReader;
+import model.utils.FileObjectWriter;
 
 public class FileTeacherManager implements TeacherManager {
 

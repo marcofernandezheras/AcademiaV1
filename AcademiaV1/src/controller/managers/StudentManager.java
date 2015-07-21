@@ -1,5 +1,7 @@
-package model;
+package controller.managers;
 import java.util.List;
+
+import model.Student;
 public interface StudentManager {
 	public List<Student> getAllStudents();
 	public Student getStudent(int id);
