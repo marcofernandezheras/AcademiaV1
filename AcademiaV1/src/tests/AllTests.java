@@ -9,7 +9,9 @@ import org.junit.runners.Suite.SuiteClasses;
 		FileObjectReaderTest.class, 
 		FileObjectWriterTest.class,
 		FileStudentManagerTest.class,
-		FileTeacherManagerTest.class})
+		FileTeacherManagerTest.class,
+		FileGroupManagerTest.class
+		})
 public class AllTests {
 
 }
