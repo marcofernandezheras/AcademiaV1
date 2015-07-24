@@ -180,104 +180,129 @@ public class FileGroupManagerTest {
 
 	@Test
 	public void testDeleteGroup() {
-		FileGroupManager manager = new FileGroupManager(teacherManager, studentManager);
-		assertEquals(0, manager.getAllGroups().size());
-		
-		Teacher group1Teacher = teacherManager.getTeacher("teacherDni1");
-		
-		Group groupOne = manager.createGroup("group1", group1Teacher , studentManager.getAllStudents());
-		assertNotNull(groupOne);									
-		assertEquals(1, manager.getAllGroups().size());
-		
-		Group groupTwo = manager.createGroup("group2", group1Teacher , studentManager.getAllStudents());
-		assertNotNull(groupTwo);									
-		assertEquals(2, manager.getAllGroups().size());
-		
-		manager.deleteGroup(groupOne);
-		assertEquals(2, manager.getAllGroups().size());
-		
-		FileGroupManager manageTwo = new FileGroupManager(teacherManager, studentManager);
-		assertEquals(1, manageTwo.getAllGroups().size());
+		try {
+			FileGroupManager manager = new FileGroupManager(teacherManager, studentManager);
+			assertEquals(0, manager.getAllGroups().size());
+			
+			Teacher group1Teacher = teacherManager.getTeacher("teacherDni1");
+			
+			Group groupOne = manager.createGroup("group1", group1Teacher , studentManager.getAllStudents());
+			assertNotNull(groupOne);									
+			assertEquals(1, manager.getAllGroups().size());
+			
+			Group groupTwo = manager.createGroup("group2", group1Teacher , studentManager.getAllStudents());
+			assertNotNull(groupTwo);									
+			assertEquals(2, manager.getAllGroups().size());
+			
+			manager.deleteGroup(groupOne);
+			assertEquals(1, manager.getAllGroups().size());
+			
+			FileGroupManager manageTwo = new FileGroupManager(teacherManager, studentManager);
+			assertEquals(1, manageTwo.getAllGroups().size());
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
 	}
 
 	@Test
 	public void testGetStudentsFromGroup() {
-		FileGroupManager manager = new FileGroupManager(teacherManager, studentManager);
-		assertEquals(0, manager.getAllGroups().size());
-		
-		Teacher group1Teacher = teacherManager.getTeacher("teacherDni1");
-		
-		Group groupOne = manager.createGroup("group1", group1Teacher , studentManager.getAllStudents());
-		assertNotNull(groupOne);									
-		assertEquals(1, manager.getAllGroups().size());
-		
-		FileGroupManager manageTwo = new FileGroupManager(teacherManager, studentManager);
-		Group group = manageTwo.getAllGroups().get(0);
-		
-		List<Student> studentsFromGroup = manageTwo.getStudentsFromGroup(group);
-		for (Student student : studentsFromGroup) {
-			boolean found = false;
-			for (Student s : studentManager.getAllStudents()) {
-				if(s.equals(student))
-					found = true;
+		try {
+			FileGroupManager manager = new FileGroupManager(teacherManager, studentManager);
+			assertEquals(0, manager.getAllGroups().size());
+			
+			Teacher group1Teacher = teacherManager.getTeacher("teacherDni1");
+			
+			Group groupOne = manager.createGroup("group1", group1Teacher , studentManager.getAllStudents());
+			assertNotNull(groupOne);									
+			assertEquals(1, manager.getAllGroups().size());
+			
+			FileGroupManager manageTwo = new FileGroupManager(teacherManager, studentManager);
+			Group group = manageTwo.getAllGroups().get(0);
+			
+			List<Student> studentsFromGroup = manageTwo.getStudentsFromGroup(group);
+			for (Student student : studentsFromGroup) {
+				boolean found = false;
+				for (Student s : studentManager.getAllStudents()) {
+					if(s.equals(student))
+						found = true;
+				}
+				assertTrue(found);
 			}
-			assertTrue(found);
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
 		}
 	}
 
 	@Test
 	public void testGetTeacherFromGroup() {
-		FileGroupManager manager = new FileGroupManager(teacherManager, studentManager);
-		assertEquals(0, manager.getAllGroups().size());
-		
-		Teacher group1Teacher = teacherManager.getTeacher("teacherDni1");
-		
-		Group groupOne = manager.createGroup("group1", group1Teacher , studentManager.getAllStudents());
-		assertNotNull(groupOne);									
-		assertEquals(1, manager.getAllGroups().size());
-		
-		FileGroupManager manageTwo = new FileGroupManager(teacherManager, studentManager);
-		Group group = manageTwo.getAllGroups().get(0);
-		
-		assertEquals(group1Teacher, manager.getTeacherFromGroup(group)); 
+		try {
+			FileGroupManager manager = new FileGroupManager(teacherManager, studentManager);
+			assertEquals(0, manager.getAllGroups().size());
+			
+			Teacher group1Teacher = teacherManager.getTeacher("teacherDni1");
+			
+			Group groupOne = manager.createGroup("group1", group1Teacher , studentManager.getAllStudents());
+			assertNotNull(groupOne);									
+			assertEquals(1, manager.getAllGroups().size());
+			
+			FileGroupManager manageTwo = new FileGroupManager(teacherManager, studentManager);
+			Group group = manageTwo.getAllGroups().get(0);
+			
+			assertEquals(group1Teacher, manager.getTeacherFromGroup(group));
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		} 
 	}
 
 	@Test
 	public void testGetAllGroupsByTeacher() {
-		FileGroupManager manager = new FileGroupManager(teacherManager, studentManager);
-		assertEquals(0, manager.getAllGroups().size());
-		
-		Teacher group1Teacher = teacherManager.getTeacher("teacherDni1");
-		
-		Group groupOne = manager.createGroup("group1", group1Teacher , studentManager.getAllStudents());
-		assertNotNull(groupOne);									
-		assertEquals(1, manager.getAllGroups().size());
-		
-		Group groupTwo = manager.createGroup("group2", group1Teacher , studentManager.getAllStudents());
-		assertNotNull(groupTwo);									
-		assertEquals(2, manager.getAllGroups().size());
-		
-		List<Group> allGroupsByTeacher = manager.getAllGroupsByTeacher(group1Teacher);
-		assertEquals(2, allGroupsByTeacher.size());
+		try {
+			FileGroupManager manager = new FileGroupManager(teacherManager, studentManager);
+			assertEquals(0, manager.getAllGroups().size());
+			
+			Teacher group1Teacher = teacherManager.getTeacher("teacherDni1");
+			
+			Group groupOne = manager.createGroup("group1", group1Teacher , studentManager.getAllStudents());
+			assertNotNull(groupOne);									
+			assertEquals(1, manager.getAllGroups().size());
+			
+			Group groupTwo = manager.createGroup("group2", group1Teacher , studentManager.getAllStudents());
+			assertNotNull(groupTwo);									
+			assertEquals(2, manager.getAllGroups().size());
+			
+			List<Group> allGroupsByTeacher = manager.getAllGroupsByTeacher(group1Teacher);
+			assertEquals(2, allGroupsByTeacher.size());
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
 	}
 
 	@Test
 	public void testGetAllGroupsByStudent() {
-		FileGroupManager manager = new FileGroupManager(teacherManager, studentManager);
-		assertEquals(0, manager.getAllGroups().size());
-		
-		Teacher group1Teacher = teacherManager.getTeacher("teacherDni1");
-		
-		Group groupOne = manager.createGroup("group1", group1Teacher , studentManager.getAllStudents());
-		assertNotNull(groupOne);									
-		assertEquals(1, manager.getAllGroups().size());
-		
-		Group groupTwo = manager.createGroup("group2", group1Teacher , studentManager.getAllStudents());
-		assertNotNull(groupTwo);									
-		assertEquals(2, manager.getAllGroups().size());
-		
-		List<Group> allGroupsByStudent = manager.getAllGroupsByStudent(studentManager.getAllStudents().get(0));
-		assertEquals(2, allGroupsByStudent.size());
+		try {
+			FileGroupManager manager = new FileGroupManager(teacherManager, studentManager);
+			assertEquals(0, manager.getAllGroups().size());
+			
+			Teacher group1Teacher = teacherManager.getTeacher("teacherDni1");
+			
+			Group groupOne = manager.createGroup("group1", group1Teacher , studentManager.getAllStudents());
+			assertNotNull(groupOne);									
+			assertEquals(1, manager.getAllGroups().size());
+			
+			Group groupTwo = manager.createGroup("group2", group1Teacher , studentManager.getAllStudents());
+			assertNotNull(groupTwo);									
+			assertEquals(2, manager.getAllGroups().size());
+			
+			List<Group> allGroupsByStudent = manager.getAllGroupsByStudent(studentManager.getAllStudents().get(0));
+			assertEquals(2, allGroupsByStudent.size());
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
 	}
 
 	@AfterClass
