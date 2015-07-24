@@ -3,6 +3,8 @@ package controller.managers;
 import java.util.List;
 
 import model.Group;
+import model.Student;
+import model.Teacher;
 
 public interface GroupManager {
 	public List<Group> getAllGroups();
