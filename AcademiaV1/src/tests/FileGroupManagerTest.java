@@ -4,9 +4,6 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import model.Group;
@@ -99,7 +96,8 @@ public class FileGroupManagerTest {
 			assertNotNull(groupOne);									
 			assertEquals(1, manager.getAllGroups().size());
 			
-			assertEquals("group1", groupOne.getId());	
+			assertEquals("group1", groupOne.getName());	
+			assertEquals(group1Teacher.getId(), groupOne.getIdTeacher());	
 			
 			assertEquals(studentManager.getAllStudents().size(), groupOne.getStudentsIds().size());
 			for (Integer id : groupOne.getStudentsIds()) {
@@ -109,12 +107,26 @@ public class FileGroupManagerTest {
 						found = true;
 				}
 				assertTrue(found);
-			}
-			
-			assertEquals(group1Teacher.getId(), groupOne.getIdTeacher());
+			}			
 			
 			FileGroupManager managerTwo = new FileGroupManager(teacherManager, studentManager);
 			assertEquals(1, managerTwo.getAllGroups().size());
+			
+			Group groupTwo = managerTwo.getAllGroups().get(0);
+			
+			assertEquals("group1", groupTwo.getName());	
+			assertEquals(group1Teacher.getId(), groupTwo.getIdTeacher());	
+			
+			assertEquals(studentManager.getAllStudents().size(), groupTwo.getStudentsIds().size());
+			for (Integer id : groupTwo.getStudentsIds()) {
+				boolean found = false;
+				for (Student student : studentManager.getAllStudents()) {
+					if(student.getId() == id)
+						found = true;
+				}
+				assertTrue(found);
+			}		
+			
 		} catch (Exception e) {		
 			e.printStackTrace();
 			fail();
@@ -133,6 +145,7 @@ public class FileGroupManagerTest {
 			assertNotNull(groupOne);						
 			assertEquals(1, manager.getAllGroups().size());
 			
+			groupOne.setName("group2");
 			List<Student> newStudents = studentManager.getAllStudents().subList(0, 2);
 			
 			groupOne.getStudentsIds().clear();
@@ -157,7 +170,7 @@ public class FileGroupManagerTest {
 			}
 			
 			assertEquals(group1Teacher.getId(), group.getIdTeacher());	
-			assertEquals(group1Teacher.getId(), group.getIdTeacher());	
+			assertEquals("group2", group.getName());	
 			
 		} catch (Exception e) {		
 			e.printStackTrace();
@@ -167,27 +180,104 @@ public class FileGroupManagerTest {
 
 	@Test
 	public void testDeleteGroup() {
-		fail("Not yet implemented");
+		FileGroupManager manager = new FileGroupManager(teacherManager, studentManager);
+		assertEquals(0, manager.getAllGroups().size());
+		
+		Teacher group1Teacher = teacherManager.getTeacher("teacherDni1");
+		
+		Group groupOne = manager.createGroup("group1", group1Teacher , studentManager.getAllStudents());
+		assertNotNull(groupOne);									
+		assertEquals(1, manager.getAllGroups().size());
+		
+		Group groupTwo = manager.createGroup("group2", group1Teacher , studentManager.getAllStudents());
+		assertNotNull(groupTwo);									
+		assertEquals(2, manager.getAllGroups().size());
+		
+		manager.deleteGroup(groupOne);
+		assertEquals(2, manager.getAllGroups().size());
+		
+		FileGroupManager manageTwo = new FileGroupManager(teacherManager, studentManager);
+		assertEquals(1, manageTwo.getAllGroups().size());
 	}
 
 	@Test
 	public void testGetStudentsFromGroup() {
-		fail("Not yet implemented");
+		FileGroupManager manager = new FileGroupManager(teacherManager, studentManager);
+		assertEquals(0, manager.getAllGroups().size());
+		
+		Teacher group1Teacher = teacherManager.getTeacher("teacherDni1");
+		
+		Group groupOne = manager.createGroup("group1", group1Teacher , studentManager.getAllStudents());
+		assertNotNull(groupOne);									
+		assertEquals(1, manager.getAllGroups().size());
+		
+		FileGroupManager manageTwo = new FileGroupManager(teacherManager, studentManager);
+		Group group = manageTwo.getAllGroups().get(0);
+		
+		List<Student> studentsFromGroup = manageTwo.getStudentsFromGroup(group);
+		for (Student student : studentsFromGroup) {
+			boolean found = false;
+			for (Student s : studentManager.getAllStudents()) {
+				if(s.equals(student))
+					found = true;
+			}
+			assertTrue(found);
+		}
 	}
 
 	@Test
 	public void testGetTeacherFromGroup() {
-		fail("Not yet implemented");
+		FileGroupManager manager = new FileGroupManager(teacherManager, studentManager);
+		assertEquals(0, manager.getAllGroups().size());
+		
+		Teacher group1Teacher = teacherManager.getTeacher("teacherDni1");
+		
+		Group groupOne = manager.createGroup("group1", group1Teacher , studentManager.getAllStudents());
+		assertNotNull(groupOne);									
+		assertEquals(1, manager.getAllGroups().size());
+		
+		FileGroupManager manageTwo = new FileGroupManager(teacherManager, studentManager);
+		Group group = manageTwo.getAllGroups().get(0);
+		
+		assertEquals(group1Teacher, manager.getTeacherFromGroup(group)); 
 	}
 
 	@Test
 	public void testGetAllGroupsByTeacher() {
-		fail("Not yet implemented");
+		FileGroupManager manager = new FileGroupManager(teacherManager, studentManager);
+		assertEquals(0, manager.getAllGroups().size());
+		
+		Teacher group1Teacher = teacherManager.getTeacher("teacherDni1");
+		
+		Group groupOne = manager.createGroup("group1", group1Teacher , studentManager.getAllStudents());
+		assertNotNull(groupOne);									
+		assertEquals(1, manager.getAllGroups().size());
+		
+		Group groupTwo = manager.createGroup("group2", group1Teacher , studentManager.getAllStudents());
+		assertNotNull(groupTwo);									
+		assertEquals(2, manager.getAllGroups().size());
+		
+		List<Group> allGroupsByTeacher = manager.getAllGroupsByTeacher(group1Teacher);
+		assertEquals(2, allGroupsByTeacher.size());
 	}
 
 	@Test
 	public void testGetAllGroupsByStudent() {
-		fail("Not yet implemented");
+		FileGroupManager manager = new FileGroupManager(teacherManager, studentManager);
+		assertEquals(0, manager.getAllGroups().size());
+		
+		Teacher group1Teacher = teacherManager.getTeacher("teacherDni1");
+		
+		Group groupOne = manager.createGroup("group1", group1Teacher , studentManager.getAllStudents());
+		assertNotNull(groupOne);									
+		assertEquals(1, manager.getAllGroups().size());
+		
+		Group groupTwo = manager.createGroup("group2", group1Teacher , studentManager.getAllStudents());
+		assertNotNull(groupTwo);									
+		assertEquals(2, manager.getAllGroups().size());
+		
+		List<Group> allGroupsByStudent = manager.getAllGroupsByStudent(studentManager.getAllStudents().get(0));
+		assertEquals(2, allGroupsByStudent.size());
 	}
 
 	@AfterClass
