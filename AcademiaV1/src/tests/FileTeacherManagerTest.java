@@ -17,7 +17,7 @@ import controller.managers.FileTeacherManager;
 public class FileTeacherManagerTest {
 
 	@BeforeClass
-	public static void backupStudentFile()
+	public static void backupTeacherFile()
 	{
 		File testFile = new File(Constants.TEACHERS_FILE);
 		if (testFile.exists())
@@ -27,7 +27,7 @@ public class FileTeacherManagerTest {
 	
 	@Before
 	@Test
-	public void deleteStudentFile()
+	public void deleteTeacherFile()
 	{
 		File testFile = new File(Constants.TEACHERS_FILE);
 		if (testFile.exists())
@@ -184,7 +184,7 @@ public class FileTeacherManagerTest {
 	}
 
 	@AfterClass
-	public static void restoreStudentFile(){
+	public static void restoreTeacherFile(){
 		File backup = new File("backup"+Constants.TEACHERS_FILE);
 		if(backup.exists())
 			backup.renameTo(new File(Constants.TEACHERS_FILE));
