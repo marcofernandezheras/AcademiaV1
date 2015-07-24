@@ -1,6 +1,8 @@
-package model;
+package controller.managers;
 
 import java.util.List;
+
+import model.Teacher;
 
 public interface TeacherManager {
 	public List<Teacher> getAllTeachers();
