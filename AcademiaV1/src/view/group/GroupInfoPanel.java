@@ -15,6 +15,7 @@ import java.awt.Insets;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
+import javax.swing.table.DefaultTableModel;
 
 import model.Group;
 import model.Teacher;
@@ -26,10 +27,10 @@ public abstract class GroupInfoPanel extends JPanel {
 	protected JComboBox<Group> cboGroup;
 	protected JTable studentsTable;
 	protected JButton btnAction;
-
+	protected GridBagLayout gridBagLayout;
 
 	public GroupInfoPanel() {
-		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{20, 0, 0, 20, 0};
 		gridBagLayout.rowHeights = new int[]{20, 0, 0, 0, 0, 0, 20, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
@@ -80,9 +81,17 @@ public abstract class GroupInfoPanel extends JPanel {
 		studentsTable = new JTable();
 		scrollPane.setViewportView(studentsTable);
 		
+		DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"Dni", "Nombre", "Apellidos"}, 0){
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		studentsTable.setModel(tableModel);
+		
 		if(getButtonLabel() != null)
 		{
-			btnAction = new JButton(getButtonLabel());
+			btnAction = new JButton(/*getButtonLabel()*/);
 			GridBagConstraints gbc_btnAction = new GridBagConstraints();
 			gbc_btnAction.anchor = GridBagConstraints.EAST;
 			gbc_btnAction.insets = new Insets(0, 0, 5, 5);
