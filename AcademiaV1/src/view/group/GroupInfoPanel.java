@@ -101,5 +101,5 @@ public abstract class GroupInfoPanel extends JPanel {
 		}
 	}
 
-	abstract String getButtonLabel();
+	abstract protected String getButtonLabel();
 }

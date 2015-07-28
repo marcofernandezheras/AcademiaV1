@@ -17,4 +17,7 @@ public interface GroupManager {
 	
 	public List<Group> getAllGroupsByTeacher(Teacher teacher);
 	public List<Group> getAllGroupsByStudent(Student student);
+	
+	public StudentManager getStudentManager();
+	public TeacherManager getTeacherManager();
 }

@@ -142,4 +142,14 @@ public class FileGroupManager implements GroupManager {
 		return studentGroups;
 	}
 
+	@Override
+	public StudentManager getStudentManager() {		
+		return studentManager;
+	}
+
+	@Override
+	public TeacherManager getTeacherManager() {		
+		return teacherManager;
+	}
+
 }

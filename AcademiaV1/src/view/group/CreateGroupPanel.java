@@ -12,7 +12,7 @@ import javax.swing.JButton;
 import model.Student;
 
 @SuppressWarnings("serial")
-public class CreateGroupPanel extends GroupInfoPanel {
+public abstract class CreateGroupPanel extends GroupInfoPanel {
 	protected JComboBox<Student> cboStudent;
 	protected JButton btnAddStudent;
 	protected JButton btnremoveStudent;
@@ -71,6 +71,7 @@ public class CreateGroupPanel extends GroupInfoPanel {
 	}
 
 	@Override
+	protected
 	String getButtonLabel() {		
 		return "Guardar";
 	}
