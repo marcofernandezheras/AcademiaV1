@@ -55,5 +55,8 @@ public abstract class Person implements Serializable{
 		return id;
 	}
 	
-	
+	@Override
+	public String toString() {		
+		return String.format("[%s] %s %s", dni, name, surnames);
+	}
 }
