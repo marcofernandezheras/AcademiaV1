@@ -5,9 +5,11 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import javax.swing.JTextField;
 
 import model.Student;
 
@@ -67,7 +69,7 @@ public abstract class CreateGroupPanel extends GroupInfoPanel {
 		GridBagConstraints gbc_button_1 = new GridBagConstraints();
 		gbc_button_1.gridx = 3;
 		gbc_button_1.gridy = 0;
-		panel.add(btnremoveStudent, gbc_button_1);		
+		panel.add(btnremoveStudent, gbc_button_1);	
 	}
 
 	@Override
@@ -76,4 +78,8 @@ public abstract class CreateGroupPanel extends GroupInfoPanel {
 		return "Guardar";
 	}
 
+	@Override
+	protected JComponent getGroupEditor() {
+		return new JTextField();
+	}
 }

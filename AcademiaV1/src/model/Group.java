@@ -3,6 +3,7 @@ package model;
 import java.io.Serializable;
 import java.util.List;
 
+@SuppressWarnings("serial")
 public class Group implements Serializable{
 	
 	final int id;

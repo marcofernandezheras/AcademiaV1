@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 
 import model.Group;
@@ -18,9 +19,12 @@ import view.group.GroupInfoPanel;
 public class ViewGroupController extends GroupInfoPanel {
 
 	private final GroupManager groupManager;	
+	private final JComboBox<Group> comboGroup;
+	@SuppressWarnings("unchecked")
 	public ViewGroupController(GroupManager groupManager) {
 		super();
-		this.groupManager = groupManager;		
+		this.groupManager = groupManager;	
+		comboGroup = (JComboBox<Group>)cboGroup;
 		fillCboTeacher();
 		bindEvents();
 	}
@@ -43,18 +47,18 @@ public class ViewGroupController extends GroupInfoPanel {
 			}
 		});
 		
-		cboGroup.addActionListener(new ActionListener() {
+		comboGroup.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Group currentGroup = (Group) cboGroup.getSelectedItem();
+				Group currentGroup = (Group) comboGroup.getSelectedItem();
 				fillStudentTable(currentGroup);
 			}
 		});
 	}	
 
 	protected void changeTeacher(Teacher currentTeacher) {
-		DefaultComboBoxModel<Group> model = (DefaultComboBoxModel<Group>) cboGroup.getModel();
+		DefaultComboBoxModel<Group> model = (DefaultComboBoxModel<Group>) comboGroup.getModel();
 		model.removeAllElements();
 		List<Group> groupsByTeacher = groupManager.getAllGroupsByTeacher(currentTeacher);
 		for (Group group : groupsByTeacher) {

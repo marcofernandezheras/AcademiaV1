@@ -12,6 +12,7 @@ import javax.swing.JComboBox;
 
 import java.awt.Insets;
 
+import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
@@ -24,7 +25,7 @@ import model.Teacher;
 public abstract class GroupInfoPanel extends JPanel {
 	
 	protected JComboBox<Teacher> cboTeacher;
-	protected JComboBox<Group> cboGroup;
+	protected JComponent cboGroup;
 	protected JTable studentsTable;
 	protected JButton btnAction;
 	protected GridBagLayout gridBagLayout;
@@ -61,7 +62,7 @@ public abstract class GroupInfoPanel extends JPanel {
 		gbc_lblGrupo.gridy = 2;
 		add(lblGrupo, gbc_lblGrupo);
 		
-		cboGroup = new JComboBox<Group>();
+		cboGroup = getGroupEditor();
 		GridBagConstraints gbc_cboGroup = new GridBagConstraints();
 		gbc_cboGroup.insets = new Insets(0, 0, 5, 5);
 		gbc_cboGroup.fill = GridBagConstraints.HORIZONTAL;
@@ -102,4 +103,8 @@ public abstract class GroupInfoPanel extends JPanel {
 	}
 
 	abstract protected String getButtonLabel();
+	
+	protected JComponent getGroupEditor(){
+		return new JComboBox<Group>();
+	}
 }
