@@ -33,7 +33,7 @@ public abstract class GroupInfoPanel extends JPanel {
 	public GroupInfoPanel() {
 		gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{20, 0, 0, 20, 0};
-		gridBagLayout.rowHeights = new int[]{20, 0, 0, 0, 0, 0, 20, 0};
+		gridBagLayout.rowHeights = new int[]{20, 0, 0, 0, 0, 20, 20, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
@@ -92,7 +92,7 @@ public abstract class GroupInfoPanel extends JPanel {
 		
 		if(getButtonLabel() != null)
 		{
-			btnAction = new JButton(/*getButtonLabel()*/);
+			btnAction = new JButton(getButtonLabel());
 			GridBagConstraints gbc_btnAction = new GridBagConstraints();
 			gbc_btnAction.anchor = GridBagConstraints.EAST;
 			gbc_btnAction.insets = new Insets(0, 0, 5, 5);

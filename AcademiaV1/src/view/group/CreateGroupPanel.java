@@ -25,7 +25,7 @@ public abstract class CreateGroupPanel extends GroupInfoPanel {
 		super();
 		GridBagLayout gridBagLayout = (GridBagLayout) getLayout();
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 20, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 20, 20};
 		
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
