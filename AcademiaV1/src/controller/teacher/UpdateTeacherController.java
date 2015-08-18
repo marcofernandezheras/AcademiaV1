@@ -4,6 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
+import javax.swing.JOptionPane;
+
+import model.exceptions.crud.NotFoundException;
+import model.exceptions.crud.UpdateException;
 import controller.managers.TeacherManager;
 
 @SuppressWarnings("serial")
@@ -37,11 +41,15 @@ public class UpdateTeacherController extends ViewTeacherController {
 			currentTeacher.setBornDate(bornDate);
 			currentTeacher.setSalary(salary);
 			
-			teacherManager.updateTeacher(currentTeacher);
-			
-			clearUI();
-			currentTeacher = null;
-			toogleReadOnlyGUI(false);
+			try {
+				teacherManager.updateTeacher(currentTeacher);			
+				clearUI();
+				currentTeacher = null;
+				toogleReadOnlyGUI(false);
+			} catch (NotFoundException | UpdateException e) {				
+				e.printStackTrace();
+				JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			} 
 		}
 	}
 

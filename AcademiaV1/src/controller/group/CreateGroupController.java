@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 import model.Student;
 import model.Teacher;
+import model.exceptions.crud.CreateException;
 import controller.managers.GroupManager;
 import controller.managers.StudentManager;
 import controller.managers.TeacherManager;
@@ -20,8 +21,8 @@ import view.group.CreateGroupPanel;
 @SuppressWarnings("serial")
 public class CreateGroupController extends CreateGroupPanel {
 	
-	private final GroupManager groupManager;
-	private final StudentManager studentManager;
+	protected final GroupManager groupManager;
+	protected final StudentManager studentManager;
 	
 	protected JTextField txtGroup = null;
 	public CreateGroupController(GroupManager groupManager) {
@@ -79,24 +80,36 @@ public class CreateGroupController extends CreateGroupPanel {
 	
 	
 	protected void buttonEvent() {
+		List<Student> studentList = getStudentsFromTable();		
+		Teacher teacher = (Teacher) cboTeacher.getSelectedItem();
+		String groupName = txtGroup.getText();
+		if(!(teacher==null || groupName.isEmpty() || studentList.isEmpty())){
+			try {
+				groupManager.createGroup(groupName, teacher, studentList);
+				clearUi();
+				JOptionPane.showMessageDialog(this, "Grupo creado con éxito");
+			} catch (CreateException e) {
+				e.printStackTrace();
+				JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		else
+			JOptionPane.showMessageDialog(this, "El grupo debe tener profesor, alumnos y nombre");
+	}
+
+	protected List<Student> getStudentsFromTable() {
 		DefaultTableModel model = (DefaultTableModel) studentsTable.getModel();		
 		List<Student> studentList = new ArrayList<Student>(model.getRowCount());
 		
 		for (int i = 0; i < model.getRowCount(); i++) {
 			String dni = model.getValueAt(i, 0).toString();
-			Student student = studentManager.getStudent(dni);
-			studentList.add(student);			
+			Student student;
+			try {
+				student = studentManager.getStudent(dni);
+				studentList.add(student);
+			} catch (Exception e) {} 				
 		}
-		
-		Teacher teacher = (Teacher) cboTeacher.getSelectedItem();
-		String groupName = txtGroup.getText();
-		if(!(teacher==null || groupName.isEmpty() || studentList.isEmpty())){
-			groupManager.createGroup(groupName, teacher, studentList);
-			clearUi();
-			JOptionPane.showMessageDialog(this, "Grupo creado con éxito");
-		}
-		else
-			JOptionPane.showMessageDialog(this, "El grupo debe tener profesor, alumnos y nombre");
+		return studentList;
 	}
 	
 	private void clearUi() {

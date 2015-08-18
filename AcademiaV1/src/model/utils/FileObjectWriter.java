@@ -5,8 +5,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-public class FileObjectWriter implements ObjectWriter {
+import model.exceptions.WriteException;
+
+public class FileObjectWriter<T extends Serializable> implements ObjectWriter<T> {
 	
 	private final ObjectOutputStream outstream;
 	private boolean open;
@@ -34,10 +37,14 @@ public class FileObjectWriter implements ObjectWriter {
 	}
 
 	@Override
-	public void writeObject(Object input) throws IOException {
+	public void writeObject(T input) throws WriteException {
 		if(!open)
-			throw new IOException("Can't write on a closed stream");
-		outstream.writeObject(input);
-	}
+			throw new WriteException("Can't write on a closed stream");
+		try {
+			outstream.writeObject(input);
+		} catch (IOException e) {
+			throw new WriteException(e.getMessage());
+		}
+	}	
 
 }

@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 
 import controller.managers.TeacherManager;
 import model.Teacher;
+import model.exceptions.crud.NotFoundException;
+import model.exceptions.crud.RetrieveException;
 import view.teacher.ViewTeacherPanel;
 
 @SuppressWarnings("serial")
@@ -36,8 +38,16 @@ public class ViewTeacherController extends ViewTeacherPanel {
 	protected void doSearch() {
 		if(!txtSearch.getText().isEmpty())
 		{
-			currentTeacher = teacherManager.getTeacher(txtSearch.getText());
-			populateGuiData();
+			try {
+				currentTeacher = teacherManager.getTeacher(txtSearch.getText());
+				populateGuiData();
+			} catch (RetrieveException e) {
+				e.printStackTrace();
+				JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			} catch (NotFoundException e) {				
+				e.printStackTrace();
+				JOptionPane.showMessageDialog(this, "Profesor no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
 

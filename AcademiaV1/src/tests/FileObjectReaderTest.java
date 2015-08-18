@@ -2,11 +2,12 @@ package tests;
 
 import static org.junit.Assert.*;
 
-import java.io.EOFException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
+import model.exceptions.ReadException;
+import model.exceptions.crud.NotFoundException;
 import model.utils.FileObjectReader;
 
 import org.junit.BeforeClass;
@@ -34,7 +35,7 @@ public class FileObjectReaderTest {
 	
 	@Test
 	public void testNextObject() {
-		try(FileObjectReader reader = new FileObjectReader(TEST_FILE))
+		try(FileObjectReader<String> reader = new FileObjectReader<String>(TEST_FILE))
 		{
 			assertEquals(TEST_OBJECT_ONE, reader.nextObject());
 			assertEquals(TEST_OBJECT_TWO, reader.nextObject());
@@ -46,14 +47,14 @@ public class FileObjectReaderTest {
 	
 	@Test
 	public void testNextObjectUntilEnd() {
-		try(FileObjectReader reader = new FileObjectReader(TEST_FILE))
+		try(FileObjectReader<String> reader = new FileObjectReader<String>(TEST_FILE))
 		{
 			assertEquals(TEST_OBJECT_ONE, reader.nextObject());
 			assertEquals(TEST_OBJECT_TWO, reader.nextObject());		
 			reader.nextObject();
 			fail();
 		}
-		catch (EOFException e) {
+		catch (NotFoundException e) {
 			
 		}
 		catch (Exception e) {
@@ -65,17 +66,16 @@ public class FileObjectReaderTest {
 	@Test
 	public void testClose() {
 		try {
-			FileObjectReader reader = new FileObjectReader(TEST_FILE);
+			FileObjectReader<String> reader = new FileObjectReader<String>(TEST_FILE);
 			reader.close();
 			reader.nextObject();
 			fail();
-		} 
-		catch (IOException e) {
-			
-		} 
-		catch (Exception e) {
-			e.printStackTrace();
+		} 		
+		catch (ReadException e) 
+		{			
+		}catch (Exception e) {
 			fail();
+			e.printStackTrace();
 		}
 	}
 

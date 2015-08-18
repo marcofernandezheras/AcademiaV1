@@ -7,8 +7,14 @@ import java.io.IOException;
 
 import javax.swing.JPanel;
 
+import controller.group.CreateGroupController;
+import controller.group.DeleteGroupController;
+import controller.group.UpdateGroupController;
+import controller.group.ViewGroupController;
+import controller.managers.FileGroupManager;
 import controller.managers.FileStudentManager;
 import controller.managers.FileTeacherManager;
+import controller.managers.GroupManager;
 import controller.managers.StudentManager;
 import controller.managers.TeacherManager;
 import controller.student.CreateStudentController;
@@ -44,11 +50,13 @@ public class MainWindowController extends MainWindow {
 	private JPanel contentPane;
 	private final StudentManager studentManager;
 	private final TeacherManager teacherManager;
+	private final GroupManager groupManager;
 	
 	public MainWindowController() throws IOException, Exception {
 		super();
 		studentManager = new FileStudentManager();
 		teacherManager = new FileTeacherManager();
+		groupManager = new FileGroupManager(teacherManager, studentManager);
 		bindEvents();
 	}
 	
@@ -113,6 +121,34 @@ public class MainWindowController extends MainWindow {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				changePanel(new ViewTeacherController(teacherManager));
+			}
+		});
+		
+		mntmCreateGroup.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				changePanel(new CreateGroupController(groupManager));
+			}
+		});
+		
+		mntmViewGroup.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				changePanel(new ViewGroupController(groupManager));
+			}
+		});
+		
+		mntmUpdateGroup.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				changePanel(new UpdateGroupController(groupManager));
+			}
+		});
+		
+		mntmDeleteGroup.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				changePanel(new DeleteGroupController(groupManager));
 			}
 		});
 	}

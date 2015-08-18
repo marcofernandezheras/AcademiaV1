@@ -6,9 +6,9 @@ import java.util.List;
 @SuppressWarnings("serial")
 public class Group implements Serializable{
 	
-	final int id;
-	final int idTeacher;
-	final List<Integer> studentsIds;
+	private final int id;
+	private int idTeacher;
+	private List<Integer> studentsIds;
 	private String name;
 	
 	public Group(int id, String name, int idTeacher, List<Integer> studentsIds) {
@@ -43,4 +43,13 @@ public class Group implements Serializable{
 	public String toString() {
 		return name;
 	}
+
+	public void setIdTeacher(int idTeacher) {
+		this.idTeacher = idTeacher;
+	}
+
+	public void setStudentsIds(List<Integer> studentsIds) {
+		this.studentsIds = studentsIds;
+	}
+		
 }

@@ -1,15 +1,19 @@
 package controller.managers;
 
-import java.io.EOFException;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import model.Group;
 import model.Student;
 import model.Teacher;
+import model.exceptions.WriteException;
+import model.exceptions.crud.CreateException;
+import model.exceptions.crud.DeleteException;
+import model.exceptions.crud.NotFoundException;
+import model.exceptions.crud.RetrieveException;
+import model.exceptions.crud.UpdateException;
 import model.utils.Constants;
 import model.utils.FileObjectReader;
 import model.utils.FileObjectWriter;
@@ -30,17 +34,16 @@ public class FileGroupManager implements GroupManager {
 		this.teacherManager = teacherManager;
 		this.studentManager = studentManager;
 		
-		try (ObjectReader reader = new FileObjectReader(Constants.GROUPS_FILE))
+		try (ObjectReader<Group> reader = new FileObjectReader<Group>(Constants.GROUPS_FILE))
 		{
 			while(true)
 			{
-				Object object = reader.nextObject();
-				Group group = (Group)object;
+				Group group = reader.nextObject();
 				groupList.add(group);
 				if(group.getId() > lastId)
 					lastId = group.getId() + 1;
 			}
-		} catch (EOFException e) {
+		} catch (NotFoundException e) {
 			//We've read all groups
 		}
 		catch (FileNotFoundException e) {
@@ -55,22 +58,18 @@ public class FileGroupManager implements GroupManager {
 
 	@Override
 	public Group createGroup(String groupName, Teacher teacher,
-			List<Student> students) {
+			List<Student> students) throws CreateException {
 		ArrayList<Integer> idList = new ArrayList<Integer>();
 		for (Student student : students) {
 			idList.add(student.getId());
 		}
 		Group group = new Group(lastId++, groupName, teacher.getId(), idList);
 		
-		try(ObjectWriter writer = new FileObjectWriter(Constants.GROUPS_FILE))
+		try(ObjectWriter<Group> writer = new FileObjectWriter<Group>(Constants.GROUPS_FILE))
 		{
 			writer.writeObject(group);
-		} catch (IOException e) {			
-			e.printStackTrace();
-			return null;
 		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
+			throw new CreateException(e.getMessage());
 		}
 		
 		groupList.add(group);
@@ -78,34 +77,42 @@ public class FileGroupManager implements GroupManager {
 	}
 
 	@Override
-	public void updateGroup(Group group) {
-		deleteGroup(group);
-		writeGroupToFile(group);
-		groupList.add(group);
+	public void updateGroup(Group group) throws UpdateException, NotFoundException {
+		try {
+			deleteGroup(group);
+			writeGroupToFile(group);
+			groupList.add(group);
+		} catch (WriteException | DeleteException e) {
+			throw new UpdateException(e.getMessage());
+		} 
 	}	
 
 	@Override
-	public void deleteGroup(Group group) {
+	public void deleteGroup(Group group) throws NotFoundException, DeleteException {
 		if(!groupList.remove(group))
-			throw new IllegalArgumentException("Group not found");
+			throw new NotFoundException("Group not found");
 		new File(Constants.GROUPS_FILE).delete();
 		for (Group storedGroup : groupList) {
-			writeGroupToFile(storedGroup);
+			try {
+				writeGroupToFile(storedGroup);
+			} catch (WriteException e) {
+				throw new DeleteException(e.getMessage());
+			}
 		}
 	}
 
-	private void writeGroupToFile(Group group) {
-		try(FileObjectWriter writer = new FileObjectWriter(Constants.GROUPS_FILE))
+	private void writeGroupToFile(Group group) throws WriteException  {
+		try(FileObjectWriter<Group> writer = new FileObjectWriter<Group>(Constants.GROUPS_FILE))
 		{
 			writer.writeObject(group);			
-		} catch (Exception e1) {
-			e1.printStackTrace();
-			throw new RuntimeException();
+		} 
+		catch (Exception e) {
+			throw new WriteException(e.getMessage());
 		}
 	}
 	
 	@Override
-	public List<Student> getStudentsFromGroup(Group group) {
+	public List<Student> getStudentsFromGroup(Group group) throws RetrieveException, NotFoundException {
 		List<Student> students = new ArrayList<Student>();
 		for (Integer id : group.getStudentsIds()) {
 			students.add(studentManager.getStudent(id));
@@ -114,7 +121,7 @@ public class FileGroupManager implements GroupManager {
 	}
 
 	@Override
-	public Teacher getTeacherFromGroup(Group group) {
+	public Teacher getTeacherFromGroup(Group group) throws RetrieveException, NotFoundException {
 		return teacherManager.getTeacher(group.getIdTeacher());
 	}
 

@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.io.File;
 
 import model.Teacher;
+import model.exceptions.crud.NotFoundException;
 import model.utils.Constants;
 
 import org.junit.AfterClass;
@@ -67,8 +68,13 @@ public class FileTeacherManagerTest {
 			assertEquals(teacher, manager.getTeacher(teacher.getId()));
 			
 			manager.deleteTeacher(teacher);
-			assertNull(manager.getTeacher(teacher.getId()));
-		} catch (Exception e) {		
+			Teacher teacher2 = manager.getTeacher(teacher.getId());
+			fail("Still found "+teacher2.getId());
+		}
+		catch (NotFoundException e){
+			
+		}
+		catch (Exception e) {		
 			e.printStackTrace();
 			fail();
 		}
@@ -87,8 +93,13 @@ public class FileTeacherManagerTest {
 			assertEquals(teacher, manager.getTeacher(teacher.getDni()));
 			
 			manager.deleteTeacher(teacher);
-			assertNull(manager.getTeacher(teacher.getDni()));
-		} catch (Exception e) {		
+			Teacher teacher2 = manager.getTeacher(teacher.getDni());
+			fail("Still found "+teacher2.getDni());
+		}
+		catch (NotFoundException e){
+			
+		}
+		catch (Exception e) {		
 			e.printStackTrace();
 			fail();
 		}

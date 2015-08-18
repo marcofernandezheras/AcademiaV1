@@ -1,0 +1,23 @@
+package model.exceptions;
+
+@SuppressWarnings("serial")
+public class WriteException extends Exception {
+
+	public WriteException(String message) {
+		super(message);
+	}
+
+	public WriteException(Throwable cause) {
+		super(cause);
+	}
+
+	public WriteException(String message, Throwable cause) {
+		super(message, cause);
+	}
+
+	public WriteException(String message, Throwable cause,
+			boolean enableSuppression, boolean writableStackTrace) {
+		super(message, cause, enableSuppression, writableStackTrace);
+	}
+
+}

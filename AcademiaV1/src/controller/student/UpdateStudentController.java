@@ -4,6 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
+import javax.swing.JOptionPane;
+
+import model.exceptions.crud.NotFoundException;
+import model.exceptions.crud.UpdateException;
 import controller.managers.StudentManager;
 
 @SuppressWarnings("serial")
@@ -37,10 +41,14 @@ btnAction.addActionListener(new ActionListener() {
 			currentStudent.setBornDate(bornDate);
 			currentStudent.setComments(comments);
 			
-			studentManager.updateStudent(currentStudent);
-			
-			clearUI();
-			currentStudent = null;
+			try {
+				studentManager.updateStudent(currentStudent);			
+				clearUI();
+				currentStudent = null;
+			} catch (NotFoundException | UpdateException e) {
+				e.printStackTrace();
+				JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			} 
 		}
 	}
 	

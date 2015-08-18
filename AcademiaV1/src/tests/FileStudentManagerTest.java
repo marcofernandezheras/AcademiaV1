@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.io.File;
 
 import model.Student;
+import model.exceptions.crud.NotFoundException;
 import model.utils.Constants;
 
 import org.junit.AfterClass;
@@ -67,8 +68,13 @@ public class FileStudentManagerTest {
 			assertEquals(student, manager.getStudent(student.getId()));
 			
 			manager.deleteStudent(student);
-			assertNull(manager.getStudent(student.getId()));
-		} catch (Exception e) {		
+			Student student2 = manager.getStudent(student.getId());
+			fail("Still found "+student2.getId());
+		}
+		catch (NotFoundException e){
+			
+		}
+		catch (Exception e) {		
 			e.printStackTrace();
 			fail();
 		}
@@ -87,8 +93,13 @@ public class FileStudentManagerTest {
 			assertEquals(student, manager.getStudent(student.getDni()));
 			
 			manager.deleteStudent(student);
-			assertNull(manager.getStudent(student.getDni()));
-		} catch (Exception e) {		
+			Student student2 = manager.getStudent(student.getId());
+			fail("Still found "+student2.getDni());
+		}
+		catch (NotFoundException e){
+			
+		}
+		catch (Exception e) {		
 			e.printStackTrace();
 			fail();
 		}

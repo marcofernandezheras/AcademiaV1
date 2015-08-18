@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
+import model.exceptions.crud.DeleteException;
+import model.exceptions.crud.NotFoundException;
 import controller.managers.StudentManager;
 
 @SuppressWarnings("serial")
@@ -28,10 +30,16 @@ public class DeleteStudentController extends ViewStudentController {
 			int confirmed = JOptionPane.showConfirmDialog(this, "¿Realente desea borrar este alumno?");
 			if(confirmed == JOptionPane.OK_OPTION)
 			{
-				studentManager.deleteStudent(currentStudent);
-				currentStudent = null;
-				clearUI();
-				btnAction.setEnabled(false);
+				try {
+					studentManager.deleteStudent(currentStudent);
+					currentStudent = null;
+					clearUI();
+					btnAction.setEnabled(false);
+					JOptionPane.showMessageDialog(this, "Alumno borrado");
+				} catch (NotFoundException | DeleteException e) {					
+					e.printStackTrace();
+					JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				} 
 			}
 		}
 	}

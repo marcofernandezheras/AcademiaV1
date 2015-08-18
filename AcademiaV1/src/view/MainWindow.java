@@ -22,6 +22,11 @@ public abstract class MainWindow extends JFrame {
 	protected JMenuItem mntmViewTeacher;
 	protected JMenuItem mntmUpdateTeacher;
 	protected JMenuItem mntmDeleteTeacher;
+	protected JMenu mnGrupos;
+	protected JMenuItem mntmCreateGroup;
+	protected JMenuItem mntmViewGroup;
+	protected JMenuItem mntmUpdateGroup;
+	protected JMenuItem mntmDeleteGroup;
 
 	/**
 	 * Create the frame.
@@ -62,6 +67,21 @@ public abstract class MainWindow extends JFrame {
 		
 		mntmDeleteTeacher = new JMenuItem("Borrar");
 		mnProfesores.add(mntmDeleteTeacher);
+		
+		mnGrupos = new JMenu("Grupos");
+		menuBar.add(mnGrupos);
+		
+		mntmCreateGroup = new JMenuItem("Crear");
+		mnGrupos.add(mntmCreateGroup);
+		
+		mntmViewGroup = new JMenuItem("Consultar");
+		mnGrupos.add(mntmViewGroup);
+		
+		mntmUpdateGroup = new JMenuItem("Modificar");
+		mnGrupos.add(mntmUpdateGroup);
+		
+		mntmDeleteGroup = new JMenuItem("Borrar");
+		mnGrupos.add(mntmDeleteGroup);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));

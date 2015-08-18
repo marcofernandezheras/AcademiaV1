@@ -31,7 +31,7 @@ public class FileObjectWriterTest {
 
 	@Test
 	public void testWriteObject() {		
-		try (FileObjectWriter writer = new FileObjectWriter(TEST_FILE)) {
+		try (FileObjectWriter<String> writer = new FileObjectWriter<String>(TEST_FILE)) {
 			writer.writeObject(TEST_OBJECT_ONE);
 			writer.writeObject(TEST_OBJECT_TWO);
 		} catch (IOException e) {
@@ -45,7 +45,7 @@ public class FileObjectWriterTest {
 		File testFile = new File(TEST_FILE);
 		assertTrue(testFile.exists());
 		
-		try(ObjectReader reader = new FileObjectReader(TEST_FILE))
+		try(ObjectReader<String> reader = new FileObjectReader<String>(TEST_FILE))
 		{
 			assertEquals(TEST_OBJECT_ONE, reader.nextObject());
 			assertEquals(TEST_OBJECT_TWO, reader.nextObject());		
@@ -58,7 +58,7 @@ public class FileObjectWriterTest {
 	
 	@Test
 	public void testAppendObject(){
-		try (FileObjectWriter writer = new FileObjectWriter(TEST_FILE)) {
+		try (FileObjectWriter<String> writer = new FileObjectWriter<String>(TEST_FILE)) {
 			writer.writeObject(TEST_OBJECT_ONE);
 			writer.writeObject(TEST_OBJECT_TWO);
 		} catch (IOException e) {
@@ -70,7 +70,7 @@ public class FileObjectWriterTest {
 		}
 		
 		//Append 2 more object 
-		try (FileObjectWriter writer = new FileObjectWriter(TEST_FILE)) {
+		try (FileObjectWriter<String> writer = new FileObjectWriter<String>(TEST_FILE)) {
 			writer.writeObject(TEST_OBJECT_ONE);
 			writer.writeObject(TEST_OBJECT_TWO);
 		} catch (IOException e) {
@@ -84,7 +84,7 @@ public class FileObjectWriterTest {
 		File testFile = new File(TEST_FILE);
 		assertTrue(testFile.exists());
 		
-		try(ObjectReader reader = new FileObjectReader(TEST_FILE))
+		try(ObjectReader<String> reader = new FileObjectReader<String>(TEST_FILE))
 		{
 			assertEquals(TEST_OBJECT_ONE, reader.nextObject());
 			assertEquals(TEST_OBJECT_TWO, reader.nextObject());	
@@ -102,13 +102,13 @@ public class FileObjectWriterTest {
 	@Test
 	public void testClose() {
 		try {
-			FileObjectWriter writer = new FileObjectWriter(TEST_FILE);
+			FileObjectWriter<String> writer = new FileObjectWriter<String>(TEST_FILE);
 			writer.close();		
 			try {
 				writer.writeObject(TEST_OBJECT_ONE);
 				fail("Write on a closed FileObjectWriter must throw an IOException");
 			}
-			catch(IOException e)
+			catch(Exception e)
 			{
 				//Empty because we wait an exception here
 				//cause you can't write an object on a closed writer. 

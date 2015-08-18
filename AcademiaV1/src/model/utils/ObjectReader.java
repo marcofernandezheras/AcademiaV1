@@ -1,7 +1,8 @@
 package model.utils;
 
-import java.io.IOException;
+import model.exceptions.ReadException;
+import model.exceptions.crud.NotFoundException;
 
-public interface ObjectReader extends AutoCloseable {	
-	public Object nextObject() throws IOException;
+public interface ObjectReader<T> extends AutoCloseable {	
+	public T nextObject() throws ReadException, NotFoundException;
 }
