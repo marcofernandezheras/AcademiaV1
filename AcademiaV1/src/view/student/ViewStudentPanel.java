@@ -1,7 +1,5 @@
 package view.student;
 
-import javax.swing.JLabel;
-
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -9,9 +7,16 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
-
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JList;
 import javax.swing.JPanel;
+
+import model.Student;
+
+import javax.swing.ListSelectionModel;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 
 
@@ -19,7 +24,8 @@ import javax.swing.JPanel;
 public abstract class ViewStudentPanel extends StudentInfoPanel {
 	protected JTextField txtSearch;
 	protected JButton btnSearch;
-
+	protected JList<Student> listStudent;
+	protected JComboBox<String> cboSearchType;
 	/**
 	 * Create the panel.
 	 */
@@ -28,6 +34,8 @@ public abstract class ViewStudentPanel extends StudentInfoPanel {
 		
 		
 		GridBagLayout gridBagLayout = (GridBagLayout) getLayout();
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 2.0, 0.0, 1.0, 0.0};
+		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
 		
@@ -35,7 +43,7 @@ public abstract class ViewStudentPanel extends StudentInfoPanel {
 		searchPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblNewLabel.gridwidth = 2;
+		gbc_lblNewLabel.gridwidth = 4;
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel.gridx = 1;
 		gbc_lblNewLabel.gridy = 0;
@@ -47,13 +55,13 @@ public abstract class ViewStudentPanel extends StudentInfoPanel {
 		gbl_searchPanel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		searchPanel.setLayout(gbl_searchPanel);
 		
-		JLabel lblDni = new JLabel("Dni");
-		GridBagConstraints gbc_lblDni = new GridBagConstraints();
-		gbc_lblDni.anchor = GridBagConstraints.WEST;
-		gbc_lblDni.insets = new Insets(0, 0, 5, 5);
-		gbc_lblDni.gridx = 1;
-		gbc_lblDni.gridy = 1;
-		searchPanel.add(lblDni, gbc_lblDni);
+		cboSearchType = new JComboBox<String>();
+		cboSearchType.setModel(new DefaultComboBoxModel<String>(new String[] {"DNI", "Nombre", "Apellidos"}));
+		GridBagConstraints gbc_cboSearchType = new GridBagConstraints();
+		gbc_cboSearchType.insets = new Insets(0, 0, 5, 5);
+		gbc_cboSearchType.gridx = 1;
+		gbc_cboSearchType.gridy = 1;
+		searchPanel.add(cboSearchType, gbc_cboSearchType);
 		
 		txtSearch = new JTextField();
 		GridBagConstraints gbc_txtSearch = new GridBagConstraints();
@@ -71,6 +79,21 @@ public abstract class ViewStudentPanel extends StudentInfoPanel {
 		gbc_btnSearch.gridx = 3;
 		gbc_btnSearch.gridy = 1;
 		searchPanel.add(btnSearch, gbc_btnSearch);
+		
+		listStudent = new JList<Student>();
+		listStudent.setBorder(new LineBorder(new Color(0, 0, 0)));
+		listStudent.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		GridBagConstraints gbc_listStudent = new GridBagConstraints();
+		gbc_listStudent.fill = GridBagConstraints.BOTH;
+		gbc_listStudent.gridwidth = 2;
+		gbc_listStudent.gridheight = 5;
+		gbc_listStudent.insets = new Insets(0, 0, 5, 5);
+		gbc_listStudent.gridx = 4;
+		gbc_listStudent.gridy = 1;
+		add(listStudent, gbc_listStudent);
+		
+		DefaultListModel<Student> model = new DefaultListModel<Student>();
+		listStudent.setModel(model);
 		
 		txtComments.setEnabled(false);
 		txtSurnames.setEditable(false);
