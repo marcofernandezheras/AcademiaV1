@@ -1,7 +1,5 @@
 package controller.student;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Date;
 
 import javax.swing.JOptionPane;
@@ -24,12 +22,7 @@ public class CreateStudentController extends CreateStudentPanel {
 	}
 
 	private void bindEvents() {
-		btnAction.addActionListener(new ActionListener() {			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				getDataAndCreateNewStudent();					
-			}
-		});		
+		btnAction.addActionListener(e -> getDataAndCreateNewStudent());		
 	}
 
 	private void getDataAndCreateNewStudent() {

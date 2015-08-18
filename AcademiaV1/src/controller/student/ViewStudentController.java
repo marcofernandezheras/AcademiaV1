@@ -1,7 +1,5 @@
 package controller.student;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -10,8 +8,6 @@ import java.util.function.Predicate;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import controller.managers.StudentManager;
 import model.Student;
@@ -37,21 +33,8 @@ public class ViewStudentController extends ViewStudentPanel {
 	}
 
 	private void bindEvents() {
-		btnSearch.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				doSearch();
-			}
-		});
-		
-		listStudent.addListSelectionListener(new ListSelectionListener() {
-			
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				showStudent();
-			}
-		});
+		btnSearch.addActionListener(e -> doSearch());		
+		listStudent.addListSelectionListener(e -> showStudent());
 	}
 
 	protected void doSearch() {

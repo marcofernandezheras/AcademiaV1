@@ -1,7 +1,5 @@
 package controller.group;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -41,23 +39,8 @@ public class ViewGroupController extends GroupInfoPanel {
 	}
 
 	private void bindEvents() {		
-		cboTeacher.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Teacher currentTeacher = (Teacher) cboTeacher.getSelectedItem();
-				changeTeacher(currentTeacher);
-			}
-		});
-		
-		comboGroup.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Group currentGroup = (Group) comboGroup.getSelectedItem();
-				fillStudentTable(currentGroup);
-			}
-		});
+		cboTeacher.addActionListener(e -> changeTeacher((Teacher) cboTeacher.getSelectedItem()));		
+		comboGroup.addActionListener(e -> fillStudentTable((Group) comboGroup.getSelectedItem()));
 	}	
 
 	protected void changeTeacher(Teacher currentTeacher) {

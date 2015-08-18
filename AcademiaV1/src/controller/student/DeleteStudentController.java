@@ -1,8 +1,5 @@
 package controller.student;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -16,13 +13,7 @@ public class DeleteStudentController extends ViewStudentController {
 
 	public DeleteStudentController(StudentManager studentManager) {
 		super(studentManager);
-		btnAction.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				deleteStudent();
-			}
-		});
+		btnAction.addActionListener(e -> deleteStudent());
 		btnAction.setEnabled(false);
 	}
 

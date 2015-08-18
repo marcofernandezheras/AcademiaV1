@@ -1,8 +1,5 @@
 package controller.teacher;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -16,13 +13,7 @@ public class DeleteTeacherController extends ViewTeacherController {
 
 	public DeleteTeacherController(TeacherManager teacherManager) {
 		super(teacherManager);
-		btnAction.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				deleteTeacher();
-			}
-		});
+		btnAction.addActionListener(e -> deleteTeacher());
 		btnAction.setEnabled(false);
 		setEnabledDateWidget(false);
 	}

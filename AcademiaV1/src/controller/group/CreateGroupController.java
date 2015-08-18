@@ -1,7 +1,5 @@
 package controller.group;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,29 +51,9 @@ public class CreateGroupController extends CreateGroupPanel {
 	}
 	
 	private void bindEvents() {
-		btnAction.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				buttonEvent();
-			}
-		});
-		
-		btnAddStudent.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				addStudentToTable();
-			}
-		});
-		
-		btnremoveStudent.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				removeStudentFromTable();
-			}
-		});
+		btnAction.addActionListener(e -> buttonEvent());
+		btnAddStudent.addActionListener(e -> addStudentToTable());
+		btnremoveStudent.addActionListener(e -> removeStudentFromTable());
 	}
 	
 	

@@ -1,7 +1,5 @@
 package controller.group;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,15 +24,8 @@ public class UpdateGroupController extends CreateGroupController {
 	@SuppressWarnings("unchecked")
 	public UpdateGroupController(GroupManager groupManager) {
 		super(groupManager);	
-		groupsCombo = (JComboBox<Group>) cboGroup;
-		
-		groupsCombo.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				groupChanged();
-			}
-		});
+		groupsCombo = (JComboBox<Group>) cboGroup;		
+		groupsCombo.addActionListener(e -> groupChanged());
 		fillGroupsCombo();
 	}
 

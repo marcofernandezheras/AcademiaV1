@@ -1,7 +1,5 @@
 package controller.student;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Date;
 
 import javax.swing.JOptionPane;
@@ -16,14 +14,7 @@ public class UpdateStudentController extends ViewStudentController {
 	public UpdateStudentController(StudentManager studentManager) {
 		super(studentManager);
 		toogleReadOnlyGUI(false);
-		btnAction.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				updateStudent();				
-			}
-		});
-		
+		btnAction.addActionListener(e -> updateStudent());		
 		btnAction.setEnabled(false);
 	}
 

@@ -1,7 +1,5 @@
 package controller.teacher;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Date;
 
 import javax.swing.JOptionPane;
@@ -23,12 +21,7 @@ public class CreateTeacherController extends CreateTeacherPanel {
 	}
 	
 	private void bindEvents() {	
-		btnAction.addActionListener(new ActionListener() {			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				createTeacher();
-			}
-		});
+		btnAction.addActionListener(e -> createTeacher());
 	}
 
 	protected void createTeacher() {

@@ -1,7 +1,5 @@
 package controller.teacher;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Date;
 
 import javax.swing.DefaultListModel;
@@ -17,14 +15,7 @@ public class UpdateTeacherController extends ViewTeacherController {
 
 	public UpdateTeacherController(TeacherManager teacherManager) {
 		super(teacherManager);
-		btnAction.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				updateTeacher();				
-			}
-		});
-		
+		btnAction.addActionListener(e -> updateTeacher());		
 		btnAction.setEnabled(false);
 		toogleReadOnlyGUI(false);
 	}

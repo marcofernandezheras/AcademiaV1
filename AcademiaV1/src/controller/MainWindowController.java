@@ -1,8 +1,6 @@
 package controller;
 
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.swing.JPanel;
@@ -63,94 +61,28 @@ public class MainWindowController extends MainWindow {
 	private void bindEvents() {
 		studentsMenuEvents();
 		teachersMenuEvents();
+		groupMenuEvents();
 	}
 
 	private void studentsMenuEvents() {
-		mntmCreateStudent.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				changePanel(new CreateStudentController(studentManager));
-			}
-		});
-		
-		mntmDeleteStudent.addActionListener(new ActionListener() {			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				changePanel(new DeleteStudentController(studentManager));
-			}
-		});
-		
-		mntmUpdateStudent.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				changePanel(new UpdateStudentController(studentManager));
-			}
-		});
-		
-		mntmViewStudent.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				changePanel(new ViewStudentController(studentManager));
-			}
-		});
+		mntmCreateStudent.addActionListener(e -> changePanel(new CreateStudentController(studentManager)));		
+		mntmDeleteStudent.addActionListener(e -> changePanel(new DeleteStudentController(studentManager)));
+		mntmUpdateStudent.addActionListener(e -> changePanel(new UpdateStudentController(studentManager)));
+		mntmViewStudent.addActionListener(e -> changePanel(new ViewStudentController(studentManager)));
 	}
 
 	private void teachersMenuEvents() {
-		mntmCreateTeacher.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				changePanel(new CreateTeacherController(teacherManager));
-			}
-		});
-		
-		mntmDeleteTeacher.addActionListener(new ActionListener() {			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				changePanel(new DeleteTeacherController(teacherManager));
-			}
-		});
-		
-		mntmUpdateTeacher.addActionListener(new ActionListener() {			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				changePanel(new UpdateTeacherController(teacherManager));
-			}
-		});
-		
-		mntmViewTeacher.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				changePanel(new ViewTeacherController(teacherManager));
-			}
-		});
-		
-		mntmCreateGroup.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				changePanel(new CreateGroupController(groupManager));
-			}
-		});
-		
-		mntmViewGroup.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				changePanel(new ViewGroupController(groupManager));
-			}
-		});
-		
-		mntmUpdateGroup.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				changePanel(new UpdateGroupController(groupManager));
-			}
-		});
-		
-		mntmDeleteGroup.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				changePanel(new DeleteGroupController(groupManager));
-			}
-		});
+		mntmCreateTeacher.addActionListener(e -> changePanel(new CreateTeacherController(teacherManager)));
+		mntmDeleteTeacher.addActionListener(e -> changePanel(new DeleteTeacherController(teacherManager)));
+		mntmUpdateTeacher.addActionListener(e -> changePanel(new UpdateTeacherController(teacherManager)));
+		mntmViewTeacher.addActionListener(e -> changePanel(new ViewTeacherController(teacherManager)));
+	}
+
+	protected void groupMenuEvents() {
+		mntmCreateGroup.addActionListener(e -> changePanel(new CreateGroupController(groupManager)));
+		mntmViewGroup.addActionListener(e -> changePanel(new ViewGroupController(groupManager)));
+		mntmUpdateGroup.addActionListener(e -> changePanel(new UpdateGroupController(groupManager)));
+		mntmDeleteGroup.addActionListener(e -> changePanel(new DeleteGroupController(groupManager)));
 	}
 	
 	private void changePanel(JPanel newPanel)
