@@ -133,8 +133,6 @@ public abstract class PersonInfoPanel extends JPanel {
 		gbc_txtBornDate.gridx = 2;
 		gbc_txtBornDate.gridy = 4;
 		add(txtBornDate, gbc_txtBornDate);
-		
-
 	}
 	
 	protected void setEnabledDateWidget(boolean state){

@@ -4,8 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
+import model.Teacher;
 import model.exceptions.crud.NotFoundException;
 import model.exceptions.crud.UpdateException;
 import controller.managers.TeacherManager;
@@ -24,6 +26,7 @@ public class UpdateTeacherController extends ViewTeacherController {
 		});
 		
 		btnAction.setEnabled(false);
+		toogleReadOnlyGUI(false);
 	}
 
 	protected void updateTeacher() {
@@ -46,6 +49,9 @@ public class UpdateTeacherController extends ViewTeacherController {
 				clearUI();
 				currentTeacher = null;
 				toogleReadOnlyGUI(false);
+				DefaultListModel<Teacher> model = (DefaultListModel<Teacher>) listTeacher.getModel();
+				model.removeAllElements();
+				JOptionPane.showMessageDialog(this, "Guardado");
 			} catch (NotFoundException | UpdateException e) {				
 				e.printStackTrace();
 				JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -59,9 +65,9 @@ public class UpdateTeacherController extends ViewTeacherController {
 	}
 	
 	@Override
-	protected void doSearch() {
-		super.doSearch();
-		toogleReadOnlyGUI(currentTeacher != null);	
+	protected void showTeacher() {	
+		super.showTeacher();
+		toogleReadOnlyGUI(currentTeacher != null);
 	}
 
 	private void toogleReadOnlyGUI(boolean writable) {

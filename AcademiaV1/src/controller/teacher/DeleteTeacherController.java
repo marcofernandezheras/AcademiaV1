@@ -3,8 +3,10 @@ package controller.teacher;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
+import model.Teacher;
 import model.exceptions.crud.DeleteException;
 import model.exceptions.crud.NotFoundException;
 import controller.managers.TeacherManager;
@@ -22,6 +24,7 @@ public class DeleteTeacherController extends ViewTeacherController {
 			}
 		});
 		btnAction.setEnabled(false);
+		setEnabledDateWidget(false);
 	}
 
 	protected void deleteTeacher() {
@@ -35,6 +38,9 @@ public class DeleteTeacherController extends ViewTeacherController {
 					clearUI();
 					currentTeacher = null;
 					btnAction.setEnabled(false);
+					DefaultListModel<Teacher> model = (DefaultListModel<Teacher>) listTeacher.getModel();
+					model.removeAllElements();
+					JOptionPane.showMessageDialog(this, "Borrado");
 				} catch (NotFoundException | DeleteException e) {					
 					e.printStackTrace();
 					JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -44,8 +50,8 @@ public class DeleteTeacherController extends ViewTeacherController {
 	}
 
 	@Override
-	protected void doSearch() {	
-		super.doSearch();
+	protected void showTeacher() {	
+		super.showTeacher();
 		btnAction.setEnabled(currentTeacher != null);
 	}
 	
