@@ -3,8 +3,10 @@ package controller.student;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
+import model.Student;
 import model.exceptions.crud.DeleteException;
 import model.exceptions.crud.NotFoundException;
 import controller.managers.StudentManager;
@@ -35,6 +37,8 @@ public class DeleteStudentController extends ViewStudentController {
 					currentStudent = null;
 					clearUI();
 					btnAction.setEnabled(false);
+					DefaultListModel<Student> model = (DefaultListModel<Student>) listStudent.getModel();
+					model.removeAllElements();
 					JOptionPane.showMessageDialog(this, "Alumno borrado");
 				} catch (NotFoundException | DeleteException e) {					
 					e.printStackTrace();
@@ -43,10 +47,10 @@ public class DeleteStudentController extends ViewStudentController {
 			}
 		}
 	}
-
+	
 	@Override
-	protected void doSearch() {	
-		super.doSearch();
+	protected void showStudent() {	
+		super.showStudent();
 		btnAction.setEnabled(currentStudent != null);
 	}
 	

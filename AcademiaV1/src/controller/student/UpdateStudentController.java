@@ -15,7 +15,8 @@ public class UpdateStudentController extends ViewStudentController {
 
 	public UpdateStudentController(StudentManager studentManager) {
 		super(studentManager);
-btnAction.addActionListener(new ActionListener() {
+		toogleReadOnlyGUI(false);
+		btnAction.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -45,6 +46,7 @@ btnAction.addActionListener(new ActionListener() {
 				studentManager.updateStudent(currentStudent);			
 				clearUI();
 				currentStudent = null;
+				toogleReadOnlyGUI(false);
 			} catch (NotFoundException | UpdateException e) {
 				e.printStackTrace();
 				JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -59,14 +61,14 @@ btnAction.addActionListener(new ActionListener() {
 		txtBornDate.setEnabled(writable);
 		txtBornDate.getComponent(1).setEnabled(writable);
 		txtComments.setEditable(writable);
+		txtComments.setEnabled(writable);
 		btnAction.setEnabled(writable);	
 	}	
 
 	@Override
 	protected void clearUI() {
 		super.clearUI();
-		toogleReadOnlyGUI(false);
-		currentStudent = null;
+		toogleReadOnlyGUI(true);
 	}
 	
 	@Override

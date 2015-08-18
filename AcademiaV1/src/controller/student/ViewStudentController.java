@@ -49,8 +49,7 @@ public class ViewStudentController extends ViewStudentPanel {
 			
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
-				currentStudent = listStudent.getSelectedValue();
-				populateGuiData();
+				showStudent();
 			}
 		});
 	}
@@ -101,5 +100,10 @@ public class ViewStudentController extends ViewStudentPanel {
 	protected void clearUI() {
 		super.clearUI();
 		txtComments.setText("");
+	}
+
+	protected void showStudent() {
+		currentStudent = listStudent.getSelectedValue();
+		populateGuiData();
 	}
 }
