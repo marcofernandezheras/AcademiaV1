@@ -11,6 +11,12 @@ public class Teacher extends Person{
 		super(id, dni, name, surnames);
 	}
 
+	public Teacher(int id, String dni, String name, String surnames,
+			BigDecimal salary) {
+		super(id, dni, name, surnames);
+		this.salary = salary;
+	}
+
 	public BigDecimal getSalary() {
 		return salary;
 	}
