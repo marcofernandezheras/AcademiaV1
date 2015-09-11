@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Date;
+
 @SuppressWarnings("serial")
 public class Student extends Person{
 	
@@ -7,6 +9,13 @@ public class Student extends Person{
 	
 	public Student(int id, String dni, String name, String surnames) {
 		super(id, dni, name, surnames);		
+	}
+	
+	public Student(int id, String dni, String name, String surnames, Date born,
+			String comments) {
+		super(id, dni, name, surnames);
+		this.comments = comments;
+		this.setBornDate(born);
 	}
 
 	public String getComments() {

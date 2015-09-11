@@ -10,6 +10,7 @@ import model.Student;
 import model.exceptions.crud.CreateException;
 import model.exceptions.crud.NotFoundException;
 import model.exceptions.crud.UpdateException;
+import model.utils.SqlConnectionManager;
 
 @SuppressWarnings("serial")
 public class CreateStudentController extends CreateStudentPanel {
@@ -35,13 +36,16 @@ public class CreateStudentController extends CreateStudentPanel {
 			Date bornDate = (Date)txtBornDate.getModel().getValue();
 			
 			try {
+				SqlConnectionManager.startTransaccion();
 				Student student = studentManager.createStudent(dni, name, surnames);
 				student.setBornDate(bornDate);
 				student.setComments(txtComments.getText());
 				studentManager.updateStudent(student);
+				SqlConnectionManager.commit();
 				JOptionPane.showMessageDialog(this, "Nuevo alumno creado con éxito");			
 				clearUI();
-			} catch (CreateException | UpdateException | NotFoundException e) {				
+			} catch (CreateException | UpdateException | NotFoundException e) {	
+				SqlConnectionManager.rollback();
 				e.printStackTrace();
 				JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			} 

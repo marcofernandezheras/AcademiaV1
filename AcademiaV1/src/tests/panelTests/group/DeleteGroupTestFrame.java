@@ -6,11 +6,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import controller.group.DeleteGroupController;
-import controller.managers.FileGroupManager;
-import controller.managers.FileStudentManager;
-import controller.managers.FileTeacherManager;
 import controller.managers.StudentManager;
 import controller.managers.TeacherManager;
+import controller.managers.file.FileGroupManager;
+import controller.managers.file.FileStudentManager;
+import controller.managers.file.FileTeacherManager;
 
 @SuppressWarnings("serial")
 public class DeleteGroupTestFrame extends JFrame {

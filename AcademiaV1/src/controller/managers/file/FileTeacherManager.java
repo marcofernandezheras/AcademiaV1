@@ -1,11 +1,10 @@
-package controller.managers;
+package controller.managers.file;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Predicate;
+
+import controller.managers.AbstractTeacherManager;
 import model.Teacher;
 import model.exceptions.WriteException;
 import model.exceptions.crud.CreateException;
@@ -16,10 +15,10 @@ import model.utils.Constants;
 import model.utils.FileObjectReader;
 import model.utils.FileObjectWriter;
 
-public class FileTeacherManager implements TeacherManager {
+public class FileTeacherManager extends AbstractTeacherManager {
 
 	private static int lastId = 1;
-	List<Teacher> teacherList = new ArrayList<Teacher>();
+	
 	
 	public FileTeacherManager() throws IOException, Exception {
 		try(FileObjectReader<Teacher> reader = new FileObjectReader<Teacher>(Constants.TEACHERS_FILE))
@@ -36,38 +35,7 @@ public class FileTeacherManager implements TeacherManager {
 		catch (NotFoundException e) {
 			//We've read all Teachers
 		}
-	}
-	
-	@Override
-	public List<Teacher> getAllTeachers() {
-		return teacherList;
-	}
-
-	@Override
-	public Teacher getTeacher(int id) throws NotFoundException {
-		List<Teacher> validTeachers = getTeachers(s -> s.getId() == id);
-		if(validTeachers.isEmpty())
-			throw new NotFoundException("Teacher for ID "+ id + " not found");
-		return validTeachers.get(0);
-	}
-
-	@Override
-	public Teacher getTeacher(String dni) throws NotFoundException {
-		List<Teacher> validTeachers = getTeachers(s -> s.getDni().equalsIgnoreCase(dni));
-		if(validTeachers.isEmpty())
-			throw new NotFoundException("Teacher for DNI "+ dni + " not found");
-		return validTeachers.get(0);
-	}
-
-	@Override
-	public List<Teacher> getTeachers(Predicate<Teacher> predicate) {
-		List<Teacher> validTeachers = new ArrayList<Teacher>();
-		for (Teacher teacher : teacherList) {
-			if(predicate.test(teacher))
-				validTeachers.add(teacher);
-		}
-		return validTeachers;
-	}
+	}		
 	
 	@Override
 	public Teacher createTeacher(String dni, String name, String surnames) throws CreateException {

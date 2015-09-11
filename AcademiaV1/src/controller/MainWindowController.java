@@ -9,12 +9,12 @@ import controller.group.CreateGroupController;
 import controller.group.DeleteGroupController;
 import controller.group.UpdateGroupController;
 import controller.group.ViewGroupController;
-import controller.managers.FileGroupManager;
-import controller.managers.FileStudentManager;
-import controller.managers.FileTeacherManager;
 import controller.managers.GroupManager;
 import controller.managers.StudentManager;
 import controller.managers.TeacherManager;
+import controller.managers.sql.SqlGroupManager;
+import controller.managers.sql.SqlStudentManager;
+import controller.managers.sql.SqlTeacherManager;
 import controller.student.CreateStudentController;
 import controller.student.DeleteStudentController;
 import controller.student.UpdateStudentController;
@@ -52,9 +52,9 @@ public class MainWindowController extends MainWindow {
 	
 	public MainWindowController() throws IOException, Exception {
 		super();
-		studentManager = new FileStudentManager();
-		teacherManager = new FileTeacherManager();
-		groupManager = new FileGroupManager(teacherManager, studentManager);
+		studentManager = new SqlStudentManager();
+		teacherManager = new SqlTeacherManager();
+		groupManager = new SqlGroupManager(teacherManager, studentManager);
 		bindEvents();
 	}
 	

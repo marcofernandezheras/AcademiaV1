@@ -1,6 +1,7 @@
 package model;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 @SuppressWarnings("serial")
 public class Teacher extends Person{
@@ -17,6 +18,12 @@ public class Teacher extends Person{
 		this.salary = salary;
 	}
 
+	public Teacher(int id, String dni, String name, String surnames, Date born,
+			BigDecimal salary){
+		this(id, dni, name, surnames, salary);
+		this.setBornDate(born);
+	}
+	
 	public BigDecimal getSalary() {
 		return salary;
 	}

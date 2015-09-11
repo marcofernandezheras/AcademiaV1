@@ -6,7 +6,7 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import controller.managers.FileTeacherManager;
+import controller.managers.file.FileTeacherManager;
 import controller.teacher.UpdateTeacherController;
 
 @SuppressWarnings("serial")
